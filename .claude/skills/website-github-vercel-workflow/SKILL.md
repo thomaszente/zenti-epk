@@ -46,7 +46,7 @@ too and add it to that workflow.
 - `src/components/` — one file per section.
 - `src/lib/usePlayer.js` — the audio player shared by the track list and the bar.
 - `public/img/`, `public/audio/` — assets, copied to `dist/` untouched.
-- `api/booking.js` — serverless function emailing booking inquiries via Resend.
+- `api/booking.mjs` — serverless function emailing booking inquiries via Resend.
 - `vercel.json` — build settings and cache headers.
 
 ## Before starting
