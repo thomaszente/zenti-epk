@@ -1,23 +1,1343 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ZENTI, Austin-based DJ and producer. Electronic press kit: bio, sets, originals, photos, rider and booking.">
 <title>ZENTI Press Kit</title>
-<meta name="description" content="ZENTI — Deep Magic Music, shaped into a journey for the room and the hour. Electronic press kit: bio, experience, mixes, press photos, technical rider and booking.">
-<meta property="og:title" content="ZENTI — Deep Magic Music">
-<meta property="og:description" content="Electronic press kit: bio, experience, mixes, press photos, technical rider and booking.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="img/hero.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0A0A0B">
-<link rel="icon" href="img/zenti-logo.png">
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+<style>
+:root{
+  /* One night, played top to bottom. A fixed 3D sky carries the hour from sunset to sunrise;
+     the content rides on it in one left-aligned column, photos go full-bleed where they earn it.
+     Single dark theme by choice: this is a booth at night. */
+  --stage:#0A0A0B; --stage-2:#151413; --rule:#2B2927;
+  --bone:#F1EDE4; --bone-dim:#C2BCB0; --bone-mute:#948E83;
+  --ember:#E0A46A;
+  --hue:#E9A45C;                 /* colour of the current hour, driven by scroll */
+  --display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --text:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --t-s:14px; --t-m:17px; --t-l:21px; --t-xl:28px;
+  --t-h2:clamp(34px,4.9vw,64px); --t-h3:clamp(26px,3vw,40px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--stage)}
+body{background:var(--stage);color:var(--bone);font-family:var(--text);font-size:var(--t-m);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:var(--stage)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+img,video,canvas{display:block}
+img{max-width:100%}
+a{color:inherit}
+p,figure,dl,dd,ul,ol{margin:0;padding:0}
+ul,ol{list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-shadow:none}
+:focus-visible{outline:2px solid var(--hue);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:440;font-variation-settings:"SOFT" 70;letter-spacing:-.018em;line-height:1.04;text-wrap:balance;margin:0}
+h2{font-size:var(--t-h2)}
+h3{font-size:var(--t-h3)}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* THE SKY: fallback wash, WebGL canvas, foreground dust, film grain */
+.sky-fb,.sky,.dust,.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.sky-fb{z-index:0;background:var(--stage);background:radial-gradient(130% 62% at 50% 112%,color-mix(in srgb,var(--hue) 30%,transparent),transparent 72%),var(--stage)}
+.sky{z-index:0}
+.dust{z-index:2}
+.grain{z-index:3;opacity:.06;background-size:160px 160px}
+main{position:relative;overflow-x:clip;text-shadow:0 1px 24px rgba(10,10,11,.6)}
+
+/* CONTROLS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1.1 var(--text);padding:14px 22px;border:1px solid transparent;border-radius:2px;text-decoration:none;text-shadow:none;transition:background .25s,color .25s,border-color .25s}
+.btn.solid{background:var(--hue);color:var(--stage)}
+.btn.solid:hover{background:var(--bone)}
+.btn.line{border-color:rgba(241,237,228,.36);color:var(--bone)}
+.btn.line:hover{border-color:var(--hue);color:var(--hue)}
+.btn.sm{padding:10px 16px;font-size:14px}
+.txt{color:var(--bone);text-decoration:underline;text-decoration-color:var(--hue);text-decoration-thickness:1px;text-underline-offset:5px}
+.txt:hover{color:var(--hue)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(241,237,228,.22);border-radius:2px;padding:12px 14px;width:100%;text-shadow:none}
+textarea{min-height:112px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--hue)}
+label{font-size:var(--t-s);color:var(--bone-dim)}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;margin-bottom:-65px;border-bottom:1px solid transparent;transition:background .35s,border-color .35s}
+.nav.solid{background:rgba(10,10,11,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom-color:var(--rule)}
+.nav .wrap{display:flex;align-items:center;gap:22px;height:64px}
+.nav .logo img{height:24px;width:auto}
+.nav ul{display:flex;gap:24px;margin-left:auto}
+.nav ul a{text-decoration:none;color:var(--bone-dim);font-size:15px}
+.nav ul a:hover{color:var(--bone)}
+.hour{display:flex;align-items:center;gap:9px;color:var(--bone-dim);font-size:var(--t-s);white-space:nowrap}
+.hour svg{flex:none}
+@media (max-width:980px){.nav ul{display:none}.hour{margin-left:auto}}
+@media (max-width:430px){.hour span{display:none}.nav .wrap{gap:14px}}
+
+/* HERO */
+.hero{position:relative;min-height:max(640px,100svh);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero-media{position:absolute;inset:-4% 0 -4%;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(ellipse 70% 84% at 60% 38%,#000 38%,transparent 84%);mask-image:radial-gradient(ellipse 70% 84% at 60% 38%,#000 38%,transparent 84%);will-change:transform}
+.hero-media>img{position:absolute;left:0;top:0;width:118%;max-width:none;height:100%;object-fit:cover;object-position:50% 26%}
+@media (max-width:760px){.hero-media>img{width:100%;object-position:52% 26%}}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(205deg,var(--hue),transparent 68%);mix-blend-mode:soft-light;opacity:.6}
+.hero-media video{position:absolute;inset:-12%;width:124%;height:124%;object-fit:cover;mix-blend-mode:screen;opacity:.62;will-change:transform}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,11,.72) 0%,rgba(10,10,11,.2) 52%,transparent 78%),linear-gradient(180deg,rgba(10,10,11,.5) 0%,transparent 22%,transparent 58%,rgba(10,10,11,.86) 100%)}
+.hero>.wrap{width:100%}
+.hero-copy{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding-top:120px;padding-bottom:44px;will-change:transform,opacity}
+.hero .kit{font-size:var(--t-s);color:var(--bone-dim)}
+.hero h1 img{width:min(480px,68vw);height:auto}
+.dmm{font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:440;font-size:clamp(30px,4.6vw,60px);line-height:1;letter-spacing:-.02em;margin-top:10px}
+.hero .tag{font-family:var(--display);font-style:italic;font-weight:380;font-size:clamp(20px,2.4vw,30px);line-height:1.25;color:var(--bone-dim);max-width:24em;margin-top:-8px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.hero .btn.line{background:rgba(10,10,11,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.hero-foot{position:relative;background:linear-gradient(180deg,rgba(10,10,11,.5) 0,rgba(10,10,11,.84) 40px)}
+.facts{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;padding-block:22px 30px;border-top:1px solid rgba(241,237,228,.16)}
+.facts dt{font-size:var(--t-s);color:var(--bone-mute)}
+.facts dd{font-size:16px;line-height:1.4}
+@media (max-width:860px){.facts{grid-template-columns:1fr 1fr;gap:18px 24px}}
+@keyframes rise{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
+@keyframes bloom{from{opacity:0;scale:1.07}to{opacity:1;scale:1}}
+.fx .hero-copy>*{animation:rise 1.1s var(--ease) both}
+.fx .hero-copy>*:nth-child(2){animation-delay:.1s}
+.fx .hero-copy>*:nth-child(3){animation-delay:.24s}
+.fx .hero-copy>*:nth-child(4){animation-delay:.34s}
+.fx .hero-copy>*:nth-child(5){animation-delay:.46s}
+.fx .hero-media{animation:bloom 2s var(--ease) both}
+.fx .facts{animation:rise 1.1s var(--ease) .6s both}
+
+/* SECTIONS */
+.sec{padding-block:clamp(48px,6vw,88px);scroll-margin-top:40px}
+.head{display:grid;gap:12px;max-width:800px;margin-bottom:clamp(24px,3vw,36px)}
+.head p{font-size:19px;line-height:1.5;color:var(--bone-dim);max-width:34em}
+.sub{font-family:var(--text);font-variation-settings:normal;font-weight:600;font-size:var(--t-m);letter-spacing:0;line-height:1.3;margin:clamp(32px,4vw,48px) 0 14px}
+
+/* BIO */
+.bio{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,84px);align-items:start}
+.frame{aspect-ratio:4/5;overflow:hidden;position:relative}
+.frame img{position:absolute;left:0;top:0;width:100%;height:118%;object-fit:cover;object-position:50% 18%;will-change:transform}
+.bio h2{margin-bottom:20px}
+.biobar{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.seg{display:inline-flex;gap:22px}
+.seg button{padding:6px 0;font-size:15px;color:var(--bone-mute);border-bottom:2px solid transparent}
+.seg button:hover{color:var(--bone)}
+.seg button[aria-selected="true"]{color:var(--bone);border-bottom-color:var(--hue)}
+.biotext{display:grid;gap:18px;max-width:36em}
+.biotext p{color:var(--bone-dim)}
+.biotext p:first-child{font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:400;font-size:clamp(22px,2.3vw,28px);line-height:1.32;letter-spacing:-.01em;color:var(--bone)}
+.count{color:var(--bone-mute);font-size:var(--t-s);margin-top:22px}
+@media (max-width:860px){.bio{grid-template-columns:1fr}.frame{aspect-ratio:4/3}}
+
+/* JOURNEY */
+.jr{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,64px);align-items:center;--slot:var(--hue)}
+.jr-stage{display:grid;gap:16px}
+.jr-stage canvas{width:100%;height:300px}
+.jr-stage small{color:var(--bone-mute);font-size:var(--t-s)}
+.dial{display:grid;gap:8px}
+.dial input[type=range]{-webkit-appearance:none;appearance:none;height:30px;padding:0;border:0;background:transparent;cursor:pointer}
+.dial input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,#E9A45C,#D9825E,#E0566F,#8D7BEA,#F0B7A0)}
+.dial input[type=range]::-moz-range-track{height:2px;background:linear-gradient(90deg,#E9A45C,#D9825E,#E0566F,#8D7BEA,#F0B7A0)}
+.dial input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--slot);border:3px solid var(--stage);box-shadow:0 0 0 1px var(--slot),0 0 26px var(--slot);margin-top:-10px}
+.dial input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--slot);border:3px solid var(--stage);box-shadow:0 0 0 1px var(--slot),0 0 26px var(--slot)}
+.ticks{display:grid;grid-template-columns:repeat(5,1fr)}
+.ticks button{font-size:var(--t-s);line-height:1.25;color:var(--bone-mute);padding:6px 2px;text-align:center}
+.ticks button:first-child{text-align:left}.ticks button:last-child{text-align:right}
+.ticks button:hover{color:var(--bone)}
+.ticks button[aria-pressed="true"]{color:var(--slot);font-weight:600}
+.jr-info{display:grid;gap:16px;justify-items:start}
+.jr-info .slot{color:var(--slot);font-weight:600;font-size:15px}
+.jr-info p{color:var(--bone-dim)}
+.jr-info .jr-tags{font-size:15px;color:var(--bone-mute)}
+.jr-info .proof{font-family:var(--display);font-style:italic;font-size:19px;line-height:1.4;color:var(--bone)}
+.jr-info .btn{margin-top:6px}
+.jr-info .btn:hover{border-color:var(--slot);color:var(--slot)}
+@media (max-width:860px){.jr{grid-template-columns:1fr}.jr-stage canvas{height:220px}.ticks button{font-size:12.5px}}
+
+/* EXPERIENCE */
+.credits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 28px;margin-bottom:clamp(28px,4vw,44px)}
+.credits b{display:block;font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:440;font-size:var(--t-h3);line-height:1.08;letter-spacing:-.015em}
+.credits span{display:block;margin-top:6px;color:var(--bone-mute);font-size:15px;line-height:1.4}
+@media (max-width:760px){.credits{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.credits{grid-template-columns:1fr;gap:22px}}
+.tools{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;margin-bottom:22px}
+.search{flex:1 1 280px;display:grid;gap:8px;max-width:440px}
+.filter{display:flex;flex-wrap:wrap;gap:6px 20px}
+.filter button{padding:8px 0;font-size:15px;color:var(--bone-mute);border-bottom:2px solid transparent}
+.filter button:hover{color:var(--bone)}
+.filter button[aria-pressed="true"]{color:var(--bone);border-bottom-color:var(--hue)}
+.group{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;padding:16px 0;border-top:1px solid var(--rule)}
+.group h3{font-family:var(--text);font-variation-settings:normal;font-size:var(--t-m);font-weight:600;letter-spacing:0;line-height:1.4}
+.group h3 small{display:block;color:var(--bone-mute);font-size:var(--t-s);font-weight:400}
+.names{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 0}
+.names li{font-stretch:84%;font-weight:500;font-size:var(--t-m);line-height:1.35;color:var(--bone-dim)}
+.names li::after{content:"\2022";margin:0 11px;color:var(--bone-mute);font-size:13px;font-family:var(--text)}
+.names li:last-child::after{content:none}
+.names li.top{font-family:var(--display);font-variation-settings:"SOFT" 70;font-stretch:100%;font-weight:440;font-size:26px;letter-spacing:-.01em;color:var(--bone)}
+.names li i{font-style:normal;font-size:12px;color:var(--bone-mute);margin-left:5px}
+.none{color:var(--bone-mute);padding:22px 0;border-top:1px solid var(--rule)}
+@media (max-width:760px){.group{grid-template-columns:1fr;gap:10px}}
+.bill-view{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;perspective:1700px}
+.bill-view::-webkit-scrollbar{display:none}
+.bill-track{position:relative;display:flex;gap:26px;width:max-content;padding:10px max(22px,calc((100vw - 1136px)/2)) 6px;transform-style:preserve-3d}
+.bill-track figure{flex:none;width:clamp(210px,23vw,290px);display:grid;gap:12px;scroll-snap-align:center}
+.bill-track img{width:100%;height:auto;aspect-ratio:1/1.1;object-fit:cover;object-position:top;box-shadow:0 34px 60px -34px #000}
+.bill-track figcaption{font-size:var(--t-s);color:var(--bone-mute);line-height:1.45}
+.bill-track figcaption b{display:block;color:var(--bone);font-weight:500;font-size:15px}
+.move .bill-view{overflow:hidden}
+.move .bill-track{will-change:transform}
+.move .bill-track figure{will-change:transform}
+.move .sec .head{will-change:transform}
+@media (max-width:860px){.bill-view{perspective:900px}.move .bill-track{gap:16px}}
+
+/* LISTEN */
+.mixes{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,5vw,64px)}
+.mixes a{display:grid;gap:4px;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none}
+.mixes .k{font-size:var(--t-s);color:var(--bone-mute)}
+.mixes b{font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:440;font-size:26px;line-height:1.15;letter-spacing:-.01em;transition:color .25s}
+.mixes .w{font-size:15px;color:var(--bone-dim)}
+.mixes .go{font-size:var(--t-s);color:var(--bone-mute);margin-top:6px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:color .25s,text-decoration-color .25s}
+.mixes a:hover b{color:var(--hue)}
+.mixes a:hover .go{color:var(--bone);text-decoration-color:var(--hue)}
+@media (max-width:760px){.mixes{grid-template-columns:1fr}}
+.rels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.rels figure{display:grid;gap:12px;align-content:start;perspective:900px}
+.rels img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;transition:transform .5s var(--ease);box-shadow:0 30px 50px -34px #000}
+.rels figcaption{font-size:15px;line-height:1.4}
+.rels figcaption b{display:block;font-weight:600}
+.rels figcaption span{display:block;color:var(--bone-mute);font-size:var(--t-s)}
+@media (max-width:860px){.rels{grid-template-columns:1fr 1fr}}
+.pintro{color:var(--bone-dim);max-width:34em;margin-bottom:8px}
+.trk{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;padding:16px 0;border-top:1px solid var(--rule)}
+.pbtn{width:56px;height:56px;border-radius:50%;border:1px solid rgba(241,237,228,.36);display:grid;place-items:center;transition:background .25s,color .25s,border-color .25s}
+.pbtn:hover,.trk.on .pbtn{border-color:var(--hue);color:var(--hue)}
+.pbtn svg{width:18px;height:18px;fill:currentColor}
+.pbody{display:grid;gap:8px;min-width:0}
+.prow{display:flex;flex-wrap:wrap;gap:2px 16px;align-items:baseline;justify-content:space-between}
+.prow b{font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:440;font-size:26px;line-height:1.15;letter-spacing:-.01em;transition:color .25s}
+.trk.on .prow b{color:var(--hue)}
+.prow .pk{font-size:var(--t-s);color:var(--bone-mute)}
+.ptime{color:var(--bone-mute);font-size:var(--t-s);font-variant-numeric:tabular-nums;white-space:nowrap;margin-left:auto}
+.pwave{cursor:pointer}
+.pwave canvas{width:100%;height:56px}
+@media (max-width:560px){.trk{gap:16px}.pbtn{width:48px;height:48px}}
+.linkrow{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:24px}
+.nudge{margin-top:clamp(28px,4vw,44px);font-family:var(--display);font-variation-settings:"SOFT" 70;font-size:var(--t-xl);line-height:1.2;letter-spacing:-.01em}
+
+/* PLAYER BAR */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(10,10,11,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bar .wrap{display:flex;align-items:center;gap:16px;height:72px}
+.bbtn{width:36px;height:36px;flex:none;display:grid;place-items:center;color:var(--bone-dim);border-radius:50%}
+.bbtn:hover{color:var(--hue)}
+.bbtn.main{width:44px;height:44px;border:1px solid var(--hue);color:var(--hue)}
+.bbtn.main:hover{background:var(--hue);color:var(--stage)}
+.bbtn svg{width:15px;height:15px;fill:currentColor}
+.binfo{min-width:0;flex:0 1 230px;display:grid;gap:1px}
+.binfo b{font-family:var(--display);font-variation-settings:"SOFT" 70;font-size:19px;font-weight:440;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.binfo span{color:var(--bone-mute);font-size:13px}
+.bline{flex:1 1 auto;min-width:60px;height:26px;display:flex;align-items:center;cursor:pointer}
+.bline i{display:block;width:100%;height:2px;background:var(--rule);position:relative}
+.bline i::after{content:"";position:absolute;left:0;top:0;height:2px;width:var(--p,0%);background:var(--hue)}
+body.hasbar{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+@media (max-width:700px){.bar .wrap{gap:10px;height:64px}.binfo{flex-basis:120px}.bar .ptime{display:none}}
+
+/* PHOTOS */
+.gal{display:flex;gap:14px;align-items:flex-start;margin-bottom:24px}
+.gal .col{flex:1 1 0;min-width:0;display:grid;gap:14px;will-change:transform}
+.gal button{display:block;width:100%;overflow:hidden}
+.gal img{width:100%;height:auto;transition:transform .8s var(--ease)}
+.gal button:hover img{transform:scale(1.035)}
+.lb{position:fixed;inset:0;z-index:80;background:rgba(5,5,6,.97);display:none;align-items:center;justify-content:center;padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(64px + env(safe-area-inset-bottom,0px))}
+.lb.open{display:flex}
+.lb img{max-height:100%;max-width:100%;object-fit:contain}
+.lb button{position:absolute;padding:14px 18px;font-size:15px;font-weight:600;color:var(--bone)}
+.lb button:hover{color:var(--hue)}
+.lb .x{top:calc(8px + env(safe-area-inset-top,0px));right:8px}
+.lb .pv{left:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.lb .nx{right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.lb p{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:var(--bone-mute);font-size:var(--t-s);pointer-events:none;padding:0 110px}
+
+/* RIDER */
+.rider>div{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;padding:18px 0;border-top:1px solid var(--rule)}
+.rider dt{font-weight:600}
+.rider dd b{display:block;font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:440;font-size:26px;line-height:1.2;letter-spacing:-.01em}
+.rider dd span{display:block;margin-top:6px;color:var(--bone-dim)}
+@media (max-width:760px){.rider>div{grid-template-columns:1fr;gap:8px}}
+.note{color:var(--bone-dim);margin-top:18px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+
+/* SUNRISE: the scroll-scrubbed close */
+.dawn{position:relative;height:auto}
+.dawn-stage{position:relative;height:min(78svh,640px);overflow:hidden}
+.fx .dawn{height:170vh}
+.fx .dawn-stage{position:sticky;top:0;height:100svh}
+@media (max-width:760px){.fx .dawn{height:150vh}}
+.dawn canvas{position:absolute;inset:0;width:100%;height:100%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 13%);mask-image:linear-gradient(180deg,transparent 0,#000 13%)}
+.dawn-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,11,.9) 0%,transparent 16%)}
+.dawn-scrim::before{content:"";position:absolute;inset:0;opacity:var(--a,1);background:linear-gradient(180deg,rgba(10,10,11,.7) 0%,rgba(10,10,11,.34) 42%,transparent 66%)}
+.dawn-copy{position:absolute;left:0;right:0;top:19%;display:grid;gap:20px;justify-items:start;will-change:transform,opacity}
+.dawn-copy h2{font-size:clamp(46px,8.6vw,124px);letter-spacing:-.03em;line-height:.96}
+.dawn-copy p{font-size:19px;color:var(--bone);max-width:30em}
+
+/* BOOK */
+.book-sec{padding-top:clamp(32px,4vw,56px)}
+.book{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,84px);padding:clamp(20px,4vw,48px);background:rgba(10,10,11,.74);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(241,237,228,.1)}
+.direct{display:grid;gap:10px;align-content:start;justify-items:start;color:var(--bone-dim)}
+.direct h3{margin-bottom:10px}
+.addr{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.addr b{font-weight:500;font-size:19px;color:var(--bone);user-select:all;overflow-wrap:anywhere}
+form{display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.field{display:grid;gap:8px;min-width:0}
+form>.btn{justify-self:start;cursor:pointer}
+.out{display:none;gap:14px;padding:20px;border:1px solid var(--hue);background:rgba(10,10,11,.6)}
+.out.show{display:grid}
+.out pre{font-family:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;color:var(--bone-dim);line-height:1.6;margin:0}
+.out small{color:var(--bone-mute);font-size:var(--t-s)}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:860px){.book{grid-template-columns:1fr}}
+@media (max-width:640px){.row3{grid-template-columns:1fr}}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+
+footer{position:relative;z-index:1;background:var(--stage);border-top:1px solid var(--rule);padding-block:34px 56px;color:var(--bone-mute);font-size:var(--t-s)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{text-underline-offset:4px}
+footer a:hover{color:var(--bone)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--bone);color:var(--stage);padding:11px 18px;border-radius:2px;font-size:var(--t-s);font-weight:600;z-index:90;display:none;max-width:calc(100vw - 32px)}
+.toast.show{display:block}
+body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+</style>
+<script>
+/* Motion is opt-out: mark the page before first paint so the hero opens once, cleanly. */
+(function(){var r=document.documentElement;if(!window.matchMedia||!matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('fx')})();
+</script>
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="root"></div>
-<script type="module" src="/src/main.jsx"></script>
+
+<div class="sky-fb" aria-hidden="true"></div>
+<canvas class="sky" id="sky" aria-hidden="true"></canvas>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="ZENTI, back to top"><img src="img/zenti-logo.png" alt="ZENTI" width="62" height="24"></a>
+    <ul>
+      <li><a href="#bio">Bio</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#listen">Listen</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#rider">Rider</a></li>
+    </ul>
+    <div class="hour" aria-hidden="true">
+      <svg viewBox="0 0 48 26" width="48" height="26"><path d="M3 22A21 18 0 0 1 45 22" fill="none" stroke="currentColor" stroke-opacity=".4"/><path d="M0 22.5H48" stroke="currentColor" stroke-opacity=".4"/><circle id="hour-dot" cx="3" cy="22" r="3.2" fill="var(--hue)"/></svg>
+      <span id="hour-k">Sunset</span>
+    </div>
+    <a class="btn solid sm" href="#book">Book ZENTI</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="hero-media" id="hero-media">
+    <img src="img/hero.jpg" alt="ZENTI at the decks in black and white, light beams cutting through haze behind him" width="2074" height="1545" fetchpriority="high">
+    <video id="haze" muted loop playsinline preload="auto" poster="video/haze.jpg" aria-hidden="true" tabindex="-1"><source src="video/haze.mp4" type="video/mp4"></video>
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-copy" id="hero-copy">
+    <p class="kit">Electronic press kit, 2026</p>
+    <h1><img src="img/zenti-logo.png" alt="ZENTI" width="779" height="300"></h1>
+    <p class="dmm">Deep Magic Music</p>
+    <p class="tag">shaped into a journey for the room and the hour.</p>
+    <div class="cta">
+      <a class="btn solid" href="#book">Check a date</a>
+      <a class="btn line" href="#journey">Shape the journey</a>
+    </div>
+  </div>
+  <div class="hero-foot"><div class="wrap">
+    <dl class="facts">
+      <div><dt>Based</dt><dd>Austin, Texas</dd></div>
+      <div><dt>Home scenes</dt><dd>ATX / NYC / MIA</dd></div>
+      <div><dt>Festivals</dt><dd>Burning Man, Envision, Lightning in a Bottle, Texas Eclipse</dd></div>
+      <div><dt>Founder</dt><dd>COSMOTION, 100+ events since 2015</dd></div>
+    </dl>
+  </div></div>
+</section>
+
+<section class="sec" id="bio">
+  <div class="wrap bio">
+    <figure class="frame" id="bio-frame"><img src="img/p-hat.jpg" alt="Portrait of ZENTI in a wide-brimmed hat and dark glasses" width="1500" height="3074" loading="lazy"></figure>
+    <div>
+      <h2>Between the dance floor and the unknown.</h2>
+      <div class="biobar">
+        <div class="seg" role="tablist" aria-label="Bio length">
+          <button role="tab" id="bio-s" aria-selected="false" data-len="short">Short</button>
+          <button role="tab" id="bio-m" aria-selected="true" data-len="medium">Medium</button>
+          <button role="tab" id="bio-l" aria-selected="false" data-len="full">Full</button>
+        </div>
+        <button class="btn line sm" id="bio-copy" type="button">Copy this bio</button>
+      </div>
+      <div class="biotext" id="biotext" role="tabpanel" aria-live="polite"></div>
+      <p class="count" id="biocount"></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="journey">
+  <div class="wrap">
+    <div class="head">
+      <h2>Pick the hour.<br>The room follows.</h2>
+      <p>Every set is built for its slot. Move the dial through the night and watch how ZENTI reads each one.</p>
+    </div>
+    <div class="jr" id="jr">
+      <div class="jr-stage">
+        <canvas id="jr-canvas" role="img" aria-label="A sketch of the energy arc of the set for the selected hour"></canvas>
+        <div class="dial">
+          <label for="jr-range">Hour of the night</label>
+          <input id="jr-range" type="range" min="0" max="4" step="1" value="2">
+          <div class="ticks" id="jr-ticks"></div>
+        </div>
+        <small>Energy across the length of the set. A sketch of the arc, not a setlist.</small>
+      </div>
+      <div class="jr-info" aria-live="polite">
+        <p class="slot" id="jr-k"></p>
+        <h3 id="jr-t"></h3>
+        <p id="jr-d"></p>
+        <p class="jr-tags" id="jr-tags"></p>
+        <p class="proof" id="jr-proof"></p>
+        <button class="btn line" type="button" id="jr-book">Request this slot</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="experience">
+  <div class="wrap">
+    <div class="head">
+      <h2>The rooms, the festivals, the names on the bill.</h2>
+      <p>Search for a venue, a city or an artist you know. The larger names are headliners ZENTI has opened for or shared a lineup with.</p>
+    </div>
+    <ul class="credits">
+      <li><b>Lee Burridge</b><span>Kingdom, Austin</span></li>
+      <li><b>Bedouin</b><span>Kingdom, Austin, 2025</span></li>
+      <li><b>Maceo Plex</b><span>The Concourse Project, 3 hour set, 2024</span></li>
+      <li><b>WhoMadeWho</b><span>The Concourse Project, opening set, 2023</span></li>
+      <li><b>Envision Festival</b><span>Uvita, Costa Rica, 2024</span></li>
+      <li><b>Burning Man</b><span>Caravan of Light</span></li>
+    </ul>
+    <div class="tools">
+      <div class="search"><label for="xq">Search the list</label><input id="xq" type="search" placeholder="Try Miami, Kingdom or Monolink" autocomplete="off"></div>
+      <div class="filter" id="xchips" role="group" aria-label="Show"></div>
+    </div>
+    <div id="xlist"></div>
+    <h3 class="sub">On the bill</h3>
+  </div>
+  <div class="bill-view" id="bill-view">
+    <div class="bill-track" id="bill">
+      <figure><img src="img/f-burridge.jpg" alt="Flyer: Lee Burridge with ZENTI and Ava Alika at Kingdom" width="1000" height="1225" loading="lazy"><figcaption><b>Lee Burridge</b>Support. Kingdom, Austin</figcaption></figure>
+      <figure><img src="img/f-bedouin.jpg" alt="Flyer: Bedouin, support by ZENTI and Pachakroma at Kingdom" width="1000" height="1111" loading="lazy"><figcaption><b>Bedouin</b>Support. Kingdom, Austin, March 2025</figcaption></figure>
+      <figure><img src="img/f-maceo.jpg" alt="Flyer: Maceo Plex with ZENTI, 3 hour set, The Concourse Project" width="1000" height="1061" loading="lazy"><figcaption><b>Maceo Plex</b>3 hour set. The Concourse Project, February 2024</figcaption></figure>
+      <figure><img src="img/f-envision.jpg" alt="Flyer: Envision Festival artist card for ZENTI" width="1000" height="1141" loading="lazy"><figcaption><b>Envision Festival</b>Costa Rica</figcaption></figure>
+      <figure><img src="img/f-luna.jpg" alt="Flyer: Luna Obscura lineup including ZENTI" width="1000" height="1105" loading="lazy"><figcaption><b>Luna Obscura</b>Rancho El Tinieblo, Mexico</figcaption></figure>
+      <figure><img src="img/f-donotsit.jpg" alt="Flyer: Do Not Sit On The Furniture presents ZENTI and Octa Digio" width="1000" height="1109" loading="lazy"><figcaption><b>Do Not Sit On The Furniture</b>Headline night. Miami Beach</figcaption></figure>
+      <figure><img src="img/f-pinkmoon.jpg" alt="Flyer: COSMOTION presents Pink Moon with Lemurian, Orijins and ZENTI" width="1000" height="1142" loading="lazy"><figcaption><b>COSMOTION presents Pink Moon</b>With Lemurian and Orijins. Austin</figcaption></figure>
+      <figure><img src="img/f-sakara.jpg" alt="Flyer: Sakara with Eli Light, ZENTI, Orijins b2b Audius" width="1000" height="1123" loading="lazy"><figcaption><b>Sakara</b>With Eli Light and Orijins</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="listen">
+  <div class="wrap">
+    <div class="head">
+      <h2>Six sets, from a water tower to the playa.</h2>
+      <p>Live recordings and guest mixes, all on SoundCloud.</p>
+    </div>
+    <ul class="mixes" id="mixes"></ul>
+
+    <h3 class="sub">Originals</h3>
+    <p class="pintro">Four originals, full length. Press play and the sky moves with the track. It keeps playing while you read on.</p>
+    <div class="tracks" id="tracks"></div>
+
+    <h3 class="sub">Releases</h3>
+    <div class="rels" id="rels">
+      <figure><img src="img/r-kosa.jpg" alt="Cover art: ZENTI's Zen Mood on Kosa, catalog KOSA188" width="900" height="900" loading="lazy"><figcaption><b>Zen Mood</b><span>Kosa, KOSA188</span><span>Remixes by Indiano, Nofrontera and Tolga Maktay</span></figcaption></figure>
+      <figure><img src="img/r-lump.jpg" alt="Cover art: PSI V/A on Lump Records" width="700" height="699" loading="lazy"><figcaption><b>PSI V/A</b><span>Lump Records</span></figcaption></figure>
+      <figure><img src="img/r-cafe.jpg" alt="Cover art: The Great Journey on Cafe De Anatolia" width="700" height="697" loading="lazy"><figcaption><b>The Great Journey</b><span>Cafe De Anatolia, with Kalico Jak</span></figcaption></figure>
+      <figure><img src="img/r-sun.jpg" alt="Cover art: Solar Call on A Magic Sun" width="700" height="695" loading="lazy"><figcaption><b>Solar Call</b><span>A Magic Sun</span></figcaption></figure>
+    </div>
+    <p class="linkrow">
+      <a class="txt" href="https://open.spotify.com/artist/5cwPDq4NrVBXRySkiLMkiL">Spotify</a>
+      <a class="txt" href="https://soundcloud.com/zentimusic/sets/original-tracks">Original tracks on SoundCloud</a>
+      <a class="txt" href="https://www.beatport.com/artist/zenti/1146352">Beatport</a>
+      <a class="txt" href="https://soundcloud.com/zentimusic">SoundCloud</a>
+    </p>
+    <p class="nudge">Hearing it in your room? <a class="txt" href="#book">Check a date</a></p>
+  </div>
+</section>
+
+<section class="sec" id="photos">
+  <div class="wrap">
+    <div class="head">
+      <h2>Press photos.</h2>
+      <p>Select a photo to view it large. Print-resolution files are in the photo folder.</p>
+    </div>
+    <div class="gal" id="gal"></div>
+    <p class="linkrow">
+      <a class="btn line sm" href="https://drive.google.com/drive/folders/1JY8Lvceze8-Eia08m0d-jRnWuwT7h1sn">Open the hi-res photo folder</a>
+      <a class="txt" href="https://instagram.com/zentimusic">More on Instagram</a>
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="rider">
+  <div class="wrap">
+    <div class="head">
+      <h2>What the booth needs.</h2>
+      <p>Technical rider for a DJ set.</p>
+    </div>
+    <dl class="rider">
+      <div><dt>CDJs</dt><dd><b>Pioneer CDJ-3000 or CDJ-2000NXS2</b><span>At least 2 decks, linked.</span></dd></div>
+      <div><dt>Mixer</dt><dd><b>Pioneer DJM-V10, A9 or 900NXS2</b><span>Any of the three works.</span></dd></div>
+      <div><dt>Sound</dt><dd><b>Booth monitors and a quality PA with sub</b><span>Proper monitoring in the booth matters most.</span></dd></div>
+    </dl>
+    <p class="note"><span>Different gear on site? Say so in your inquiry and we will make it work. Fee on request.</span><button class="btn line sm" id="rider-copy" type="button">Copy rider</button></p>
+  </div>
+</section>
+
+<section class="dawn" id="dawn" aria-label="Sunrise">
+  <div class="dawn-stage" id="dawn-stage">
+    <canvas id="dawn-canvas" aria-hidden="true"></canvas>
+    <div class="dawn-scrim" aria-hidden="true"></div>
+    <div class="wrap dawn-copy" id="dawn-copy">
+      <h2>Let’s make magic.</h2>
+      <p>Austin based. Available across the US and internationally.</p>
+      <a class="btn solid" href="#book">Check a date</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec book-sec" id="book">
+  <div class="wrap">
+    <div class="book">
+      <div class="direct">
+        <h3>Booking</h3>
+        <p class="addr"><b id="b-addr">zentimusic@gmail.com</b><button class="btn line sm" type="button" id="addr-copy">Copy address</button></p>
+        <a class="txt" href="https://instagram.com/zentimusic">@zentimusic</a>
+        <a class="txt" href="https://instagram.com/cosmotion.space">@cosmotion.space</a>
+      </div>
+      <form id="bk" novalidate>
+        <div class="row2">
+          <div class="field"><label for="b-name">Your name</label><input id="b-name" autocomplete="name"></div>
+          <div class="field"><label for="b-ev">Event or venue</label><input id="b-ev"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="b-date">Date</label><input id="b-date" type="date"></div>
+          <div class="field"><label for="b-city">City</label><input id="b-city"></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label for="b-slot">Slot</label>
+            <select id="b-slot"><option>Not sure yet</option><option>Sunset</option><option>Opening</option><option>Peak hour</option><option>After hours</option><option>Sunrise</option></select></div>
+          <div class="field"><label for="b-type">Type of booking</label>
+            <select id="b-type"><option>Club night</option><option>Festival</option><option>Private or brand event</option><option>Retreat or gathering</option><option>Guest mix or podcast</option></select></div>
+          <div class="field"><label for="b-len">Set length</label>
+            <select id="b-len"><option>60 minutes</option><option>90 minutes</option><option selected>2 hours</option><option>3 hours or more</option><option>Not sure yet</option></select></div>
+        </div>
+        <div class="field"><label for="b-msg">Lineup, capacity, anything else</label><textarea id="b-msg"></textarea></div>
+        <button class="btn solid" type="submit">Prepare booking request</button>
+        <div class="out" id="b-out" role="status" aria-live="polite">
+          <pre id="b-text"></pre>
+          <div class="acts"><button class="btn line sm" type="button" id="b-copy">Copy message</button><a class="btn line sm" id="b-mail" href="#">Open in email</a></div>
+          <small>This page cannot send email itself. Copy the message, or open it in your mail app, and send it to zentimusic@gmail.com.</small>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ZENTI and COSMOTION. ATX / NYC / MIA</span>
+    <nav aria-label="Links">
+      <a href="https://instagram.com/zentimusic">Instagram</a>
+      <a href="https://soundcloud.com/zentimusic">SoundCloud</a>
+      <a href="https://open.spotify.com/artist/5cwPDq4NrVBXRySkiLMkiL">Spotify</a>
+      <a href="https://www.beatport.com/artist/zenti/1146352">Beatport</a>
+      <a href="https://linktr.ee/zenti">Linktree</a>
+    </nav>
+  </div>
+</footer>
+
+<canvas class="dust" id="dust" aria-hidden="true"></canvas>
+<div class="grain" id="grain" aria-hidden="true"></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+  <button class="x" id="lb-x" type="button">Close</button>
+  <button class="pv" id="lb-pv" type="button">Previous</button>
+  <button class="nx" id="lb-nx" type="button">Next</button>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="bar" id="bar" hidden>
+  <div class="wrap">
+    <button class="bbtn" type="button" id="b-prev" aria-label="Previous track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h2v12H7zm3 6l8-6v12z"/></svg></button>
+    <button class="bbtn main" type="button" id="b-play" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="b-icon" d="M8 5v14l11-7z"/></svg></button>
+    <button class="bbtn" type="button" id="b-next" aria-label="Next track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6h2v12h-2zM6 6l8 6-8 6z"/></svg></button>
+    <div class="binfo"><b id="b-title"></b><span id="b-credit"></span></div>
+    <div class="bline" id="b-line" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+    <span class="ptime" id="b-time">0:00 / 0:00</span>
+    <button class="bbtn" type="button" id="b-close" aria-label="Stop and close the player"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
+  </div>
+</div>
+
+<script async id="three-js" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var root=document.documentElement;
+var fx=root.classList.contains('fx');            /* motion allowed (no reduced-motion preference) */
+var fine=!!(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches);
+var clamp=function(v,a,b){return v<a?a:v>b?b:v};
+var lerp=function(a,b,t){return a+(b-a)*t};
+var smooth=function(a,b,v){var t=clamp((v-a)/(b-a),0,1);return t*t*(3-2*t)};
+
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},2200)}
+function copy(text,done){
+  var fail=function(){toast('Copy was blocked. Select the text and copy it by hand.')};
+  try{navigator.clipboard.writeText(text).then(function(){toast(done)},fail)}catch(e){fail()}
+}
+
+/* THE NIGHT: five slots, one colour each. The whole page reads its hour from here. */
+var SLOTS=[
+ {k:'Sunset',c:'#E9A45C',t:'Let them arrive.',d:'Worldly rhythms, organic percussion and warm, unhurried grooves. Music for golden light and a floor that is still finding itself.',tags:['Organic house','World music','Slow-burn grooves'],proof:'Festival daylight sets at Envision, Costa Rica.',pts:[.18,.24,.32,.38,.46,.52,.6,.66]},
+ {k:'Opening',c:'#D9825E',t:'Set the table.',d:'Deep and patient. Builds the room step by step and hands the headliner a warm floor, never a tired one.',tags:['Deep house','Hypnotic','Steady build'],proof:'Opened for WhoMadeWho at The Concourse Project. Support for Lee Burridge and Bedouin at Kingdom.',pts:[.14,.2,.28,.36,.45,.55,.66,.76]},
+ {k:'Peak hour',c:'#E0566F',t:'Earn the big moments.',d:'Melodic techno drive with funk in the low end. Tension, release, and the track nobody saw coming.',tags:['Melodic techno','Driving','Funk-laced'],proof:'A 3 hour set alongside Maceo Plex at The Concourse Project.',pts:[.5,.62,.74,.6,.82,.94,.78,.9]},
+ {k:'After hours',c:'#8D7BEA',t:'Keep the floor that stays.',d:'Hypnotic and unpredictable. Long blends, strange turns, and deep pockets for the dancers who are in it until the end.',tags:['Deep and trippy','Long blends','Left turns'],proof:'10 pm to 5 am at Do Not Sit On The Furniture, Miami Beach.',pts:[.7,.62,.72,.56,.66,.5,.58,.44]},
+ {k:'Sunrise',c:'#F0B7A0',t:'Lift as the light comes up.',d:'Emotive and cinematic. Melodies that open slowly and land right as the sky turns.',tags:['Emotive','Cinematic','Melodic house'],proof:'Caravan of Light at Burning Man.',pts:[.34,.3,.38,.46,.58,.7,.82,.74]}
+];
+var PAL=SLOTS.map(function(s){var n=parseInt(s.c.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255]});
+function hueAt(h){h=clamp(h,0,PAL.length-1);var i=Math.min(PAL.length-2,Math.floor(h)),u=h-i,a=PAL[i],b=PAL[i+1];return [lerp(a[0],b[0],u),lerp(a[1],b[1],u),lerp(a[2],b[2],u)]}
+function hex(c){return '#'+((1<<24)+(Math.round(c[0])<<16)+(Math.round(c[1])<<8)+Math.round(c[2])).toString(16).slice(1)}
+var HUE=PAL[0].slice(),HUEHEX=hex(HUE);
+var N={hour:0,jr:2,pulse:0,air:0,px:0,py:0};     /* live state: hour of the night, dial slot, audio levels, pointer */
+var vw=0,vh=0,cur=0,geo={pts:[],wide:false};
+var audioLevel=function(){},requestStill=function(){};
+
+/* BIO */
+var BIO={
+ short:['ZENTI is an Austin-based DJ and producer blending deep house, melodic techno, funk and world music into hypnotic journeys tailored to the space and time. He is the founder of COSMOTION, a label and event series that fuses music, art and performance.'],
+ medium:['ZENTI is an Austin-based DJ and producer known for an eclectic blend of deep house, melodic techno, funk and world music.',
+  'Ready for any club room, festival stage or special event, he crafts journeys tailored to the space and time. He has played Burning Man, Envision Festival, Lightning in a Bottle and Texas Eclipse, sharing lineups with Lee Burridge, Bedouin, Monolink, Maceo Plex and WhoMadeWho.',
+  'His music is released on Still Play, Cafe De Anatolia, A Magic Sun, Lump Records and Kosa. ZENTI is also the founder of COSMOTION, a label and event series that fuses music, art and performance into immersive events.'],
+ full:['ZENTI creates hypnotic, unpredictable musical journeys where deep grooves, worldly rhythms and cinematic textures converge.',
+  'Rooted in Austin and shaped by years immersed in underground scenes from New York and Miami to Burning Man, his sound moves fluidly between deep house, melodic techno, funk and world music. He is known for intuitive, emotionally driven sets, each one built for the room and the hour.',
+  'He has played Burning Man, Envision Festival, Lightning in a Bottle and Texas Eclipse, and rooms including ZERO in New York, Do Not Sit On The Furniture in Miami, and Kingdom and The Concourse Project in Austin. He has shared lineups with Lee Burridge, Bedouin, Monolink, Maceo Plex, WhoMadeWho, Dubfire, Stavroz and Jan Blomqvist.',
+  'His music is released on Still Play, Cafe De Anatolia, A Magic Sun, Lump Records and Kosa, with guest mixes for Desert Hut, Magician On Duty and Do Not Sit.',
+  'ZENTI is also the founder of COSMOTION, a label and event series that has fused music, art and performance into more than 100 immersive events since 2015.']
+};
+var bioLen='medium';
+function drawBio(){
+  var box=$('biotext');box.textContent='';
+  BIO[bioLen].forEach(function(p){var el=document.createElement('p');el.textContent=p;box.appendChild(el)});
+  var words=BIO[bioLen].join(' ').split(/\s+/).length;
+  $('biocount').textContent=words+' words, third person, ready to paste into a lineup page or program.';
+  document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.len===bioLen?'true':'false')});
+}
+document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){bioLen=b.dataset.len;drawBio()})});
+$('bio-copy').addEventListener('click',function(){copy(BIO[bioLen].join('\n\n'),'Bio copied')});
+drawBio();
+
+/* EXPERIENCE: [name, place tag, headliner?] */
+var X=[
+ {id:'festivals',h:'Festivals',n:[['Burning Man','NV'],['Envision Festival','Costa Rica'],['Lightning in a Bottle','CA'],['Texas Eclipse Festival','TX'],['LoveBurn','MIA'],['Luna Obscura','Mexico'],['Electric Fuel Station','']]},
+ {id:'rooms',h:'Clubs and event series',n:[['ZERO','NY'],['Do Not Sit On The Furniture','MIA'],['The Concourse Project','ATX'],['Kingdom','ATX'],['House of Yes','NY'],['Sonic Jungle','NY'],['Gospel','NY'],['JunXion','NY'],['Orijins','NY'],['The Kazbah',''],['iFeel','NY'],['Love Medicine','NY'],['A Forest Dark','NY'],['Hqueue','NY'],['Unveiled','NY'],['Chetana','NY'],['Mila','MIA'],['Illumina Tribe','MIA'],['Tierra Santa','MIA'],['Something Else','MIA'],['Aesthesis','LA'],['Members','LA'],['Koncept','LA'],['Caravan of Light','Burning Man'],['Opulent Temple','Burning Man'],['Zephyr','Mexico'],['ALTAR',''],['Rippers Row',''],['Luna','ATX'],['Nowhere','ATX']]},
+ {id:'artists',h:'Played alongside',n:[['Lee Burridge','',1],['Bedouin','',1],['Monolink','',1],['Maceo Plex','',1],['WhoMadeWho','',1],['Dubfire','',1],['Stavroz','',1],['Jan Blomqvist','',1],['Armen Miran','',1],['Behrouz','',1],['Rodriguez Jr.','',1],['Township Rebellion','',1],['David Hohme'],['Just Emma'],['Davi'],['Goldcap'],['Lemurian'],['Wild Dark'],['Feathered Sun'],['Sarkis Mikael'],['Unders'],['Sabo'],['Rico Loop'],['Magician On Duty'],['The Soul Brothers'],['Brian Cid'],['KMLN'],['Allen Hulsey'],['Seth Schwartz'],['Nico Stojan'],['Maz'],['Joeski'],['YokoO'],['Atish'],['Oceanvs Orientalis'],['Martha Van Straaten'],['Fabian Krooss'],['Caleesi & Sarah Kreis'],['Enamour'],['Cioz'],['Anstacia'],['Kora'],['Parallelle'],['Superflu'],['Aiwaa']]},
+ {id:'mixes',h:'Podcasts and mix series',n:[['Desert Hut'],['Magician On Duty'],['A Magic Sun'],['Do Not Sit'],['Abracadabra'],['Deep House LA'],['DeeperSounds / Pure Ibiza'],['Hot Situations'],['Frisky Radio'],['Cirque Noir'],['Husa Sounds'],['Sound of Symmetry']]},
+ {id:'labels',h:'Labels',n:[['Still Play'],['Cafe De Anatolia'],['A Magic Sun'],['Lump Records'],['Kosa'],['COSMOTION']]}
+];
+var CITY={ny:'new york nyc brooklyn',mia:'miami florida',atx:'austin texas',la:'los angeles california',nv:'nevada black rock playa',ca:'california',tx:'texas'};
+var xf='all';
+var chips=$('xchips');
+[['all','All']].concat(X.map(function(g){return [g.id,g.h]})).forEach(function(c){
+  var b=document.createElement('button');b.type='button';b.textContent=c[1];b.dataset.f=c[0];
+  b.addEventListener('click',function(){xf=c[0];drawX()});chips.appendChild(b);
+});
+function drawX(){
+  var q=$('xq').value.trim().toLowerCase(),box=$('xlist'),shown=0;box.textContent='';
+  chips.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.f===xf?'true':'false')});
+  X.forEach(function(g){
+    if(xf!=='all'&&xf!==g.id)return;
+    var hit=g.n.filter(function(n){
+      if(!q)return true;
+      var tag=(n[1]||'').toLowerCase();
+      return (n[0]+' '+tag+' '+(CITY[tag]||'')).toLowerCase().indexOf(q)>-1;
+    });
+    if(!hit.length)return;
+    shown+=hit.length;
+    var row=document.createElement('div');row.className='group';
+    var h=document.createElement('h3');h.textContent=g.h;
+    var s=document.createElement('small');s.textContent=q?hit.length+' of '+g.n.length:g.n.length+' listed';h.appendChild(s);
+    var ul=document.createElement('ul');ul.className='names';
+    hit.forEach(function(n){var li=document.createElement('li');li.textContent=n[0];if(n[2])li.className='top';if(n[1]){var i=document.createElement('i');i.textContent=n[1];li.appendChild(i)}ul.appendChild(li)});
+    row.appendChild(h);row.appendChild(ul);box.appendChild(row);
+  });
+  if(!shown){var p=document.createElement('p');p.className='none';p.textContent='No match for “'+$('xq').value.trim()+'”. Clear the search to see the full list.';box.appendChild(p)}
+}
+$('xq').addEventListener('input',drawX);
+drawX();
+
+/* MIXES: [kind, title, where, link] */
+var MIX=[
+ ['Live at ZERO NY','4th of July in The Water Tower','New York','https://soundcloud.com/zentimusic/zero-4th'],
+ ['Live at Burning Man','Opulent Temple','Black Rock City, 2026','https://soundcloud.com/zentimusic/opulent-bm26'],
+ ['Live at Kingdom','Opening for Bedouin','Austin','https://soundcloud.com/zentimusic/bedouin-kingdom'],
+ ['Live at The Concourse Project','Opening for Monolink','Austin, 2026','https://soundcloud.com/zentimusic/concourse2026'],
+ ['Guest mix','Magician On Duty','Journey Series','https://soundcloud.com/magicianonduty/zenti-is-magician-on-duty-journey-series'],
+ ['Guest mix','Desert Hut Podcast Series','Chapter 109','https://soundcloud.com/deserthut/dhpsch109zenti']
+];
+MIX.forEach(function(m){
+  var li=document.createElement('li'),a=document.createElement('a');a.href=m[3];
+  [['span','k',m[0]],['b','',m[1]],['span','w',m[2]],['span','go','Open on SoundCloud']].forEach(function(p){var e=document.createElement(p[0]);if(p[1])e.className=p[1];e.textContent=p[2];a.appendChild(e)});
+  li.appendChild(a);$('mixes').appendChild(li);
+});
+
+/* PLAYER: one audio element, four tracks, a bar that follows the page.
+   Each track ships a beat envelope (kick band and air band, 30 values a second) so the sky can move with it. */
+var TRACKS=[
+ {id:'find-that-love',title:'Find That Love',credit:'2026 · original',note:'Full track. Press play, or click the waveform to jump.',src:'audio/find-that-love.mp3',dur:325.2,peaks:[0.196,0.06,0.06,0.06,0.06,0.06,0.06,0.101,0.06,0.06,0.064,0.06,0.06,0.206,0.126,0.156,0.06,0.134,0.06,0.06,1.0,0.883,0.897,0.965,0.778,0.98,0.875,0.882,0.953,0.827,0.97,0.873,0.881,0.95,0.77,0.974,0.868,0.88,0.95,0.553,1.0,0.868,0.941,0.976,0.814,1.0,0.893,0.96,0.993,0.862,0.995,0.888,0.958,0.986,0.825,0.992,0.882,0.954,0.984,0.853,0.972,0.866,0.943,0.981,0.813,1.0,0.885,0.964,0.996,0.858,0.995,0.879,0.953,0.991,0.832,0.993,0.876,0.946,0.981,0.861,0.968,0.874,0.929,0.969,0.823,0.996,0.88,0.962,0.995,0.859,0.986,0.882,0.95,0.987,0.826,0.984,0.876,0.947,0.982,0.853,0.964,0.869,0.942,0.977,0.818,0.994,0.883,0.961,0.994,0.861,0.991,0.879,0.952,0.988,0.843,0.607,0.508,0.46,0.54,0.555,1.0,0.881,0.948,0.976,0.837,1.0,0.903,0.964,1.0,0.868,0.999,0.885,0.958,0.982,0.847,0.992,0.885,0.947,0.977,0.862,0.957,0.879,0.942,0.977,0.827,1.0,0.904,0.967,0.987,0.873,0.994,0.882,0.958,0.989,0.85,0.95,0.858,0.883,0.935,0.842,0.615,0.441,0.116,0.136,0.06,0.11,0.06,0.06,0.06,0.06,0.435,0.446,0.309,0.146,0.205,0.06,0.06,0.312,0.313,0.238,0.51,0.382,0.06,0.172,0.098,0.331,0.333,0.267,0.078,0.216,0.451,0.406,0.34,0.118,0.234,0.219,0.343,0.308,0.253,0.312,0.333,0.382,0.442,0.284,0.294,0.301,0.177,0.307,0.289,0.35,0.374,0.443,0.239,0.3,0.242,0.397,0.349,0.414,0.364,0.344,0.398,0.301,0.349,0.386,0.353,0.38,0.372,0.403,0.362,0.354,0.497,0.497,0.427,0.465,0.416,0.455,0.418,0.488,0.496,0.597,0.957,0.878,0.889,0.936,0.788,0.961,0.837,0.866,0.923,0.785,0.96,0.859,0.876,0.92,0.794,0.965,0.857,0.883,0.934,0.798,0.977,0.856,0.94,0.953,0.832,0.999,0.883,0.956,0.984,0.837,0.98,0.883,0.948,0.972,0.843,0.976,0.859,0.932,0.961,0.845,0.99,0.884,0.942,0.977,0.835,1.0,0.896,0.958,0.994,0.871,0.999,0.88,0.955,0.988,0.846,0.995,0.873,0.947,0.983,0.878,0.682,0.615,0.581,0.65,0.472,0.655,0.587,0.613,0.612,0.551,0.651,0.558,0.549,0.617,0.497,0.651,0.562,0.545,0.618,0.643,0.992,0.896,0.956,0.985,0.852,1.0,0.898,0.966,0.993,0.87,0.995,0.894,0.957,0.986,0.864,0.987,0.88,0.951,0.981,0.872,0.969,0.887,0.952,0.985,0.845,0.997,0.894,0.958,0.985,0.879,0.989,0.891,0.957,0.987,0.855,0.993,0.881,0.94,0.981,0.645,0.995,0.9,0.946,0.975,0.84,1.0,0.904,0.959,0.996,0.87,0.99,0.896,0.956,0.991,0.847,0.998,0.897,0.952,0.973,0.875,0.992,0.903,0.934,0.983,0.839,1.0,0.905,0.956,0.995,0.877,1.0,0.888,0.949,0.988,0.85,0.991,0.89,0.95,0.982,0.877,0.943,0.857,0.86,0.91,0.771,0.946,0.836,0.861,0.915,0.773,0.95,0.84,0.862,0.917,0.775,0.952,0.842,0.864,0.92,0.777]},
+ {id:'dust-bunny',title:'Dust Bunny',credit:'2026 · original',note:'Full track. Press play, or click the waveform to jump.',src:'audio/dust-bunny.mp3',dur:314.75,peaks:[0.376,0.402,0.354,0.39,0.351,0.385,0.33,0.388,0.355,0.394,0.352,0.397,0.373,0.416,0.39,0.404,0.381,0.399,0.382,0.402,0.373,0.446,0.418,0.384,0.447,0.424,0.436,0.373,0.449,0.413,0.435,0.363,0.439,0.439,0.451,0.37,0.441,0.429,0.444,0.383,0.392,0.326,1.0,0.834,0.964,0.912,0.935,0.902,0.932,0.892,0.922,0.948,0.876,0.977,0.924,0.965,0.942,0.963,0.943,0.957,0.934,0.979,0.905,0.992,0.9,0.999,0.906,0.979,0.934,0.95,0.963,0.919,0.978,0.914,0.988,0.916,0.971,0.933,0.964,0.946,0.958,0.681,0.39,0.413,0.98,0.94,0.965,0.966,0.955,0.96,0.96,0.946,0.961,0.937,0.963,0.952,0.945,0.966,0.925,0.985,0.906,1.0,0.893,1.0,0.9,0.985,0.929,0.959,0.961,0.948,0.962,0.96,0.951,0.951,0.938,0.956,0.958,0.95,0.958,0.936,0.854,0.513,0.437,0.459,0.378,0.953,0.982,0.934,0.975,0.934,0.979,0.925,0.979,0.92,0.964,0.952,0.939,0.99,0.906,0.998,0.906,0.988,0.922,0.963,0.929,0.971,1.0,0.982,0.936,0.972,0.935,0.97,0.926,0.979,0.918,0.972,0.946,0.943,0.99,0.908,0.988,0.89,0.997,0.92,0.972,0.934,0.972,0.941,0.344,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.101,0.06,0.06,0.06,0.217,0.06,0.07,0.06,0.08,0.06,0.116,0.125,0.089,0.122,0.084,0.151,0.107,0.18,0.149,0.212,0.249,0.209,0.163,0.245,0.165,0.229,0.125,0.14,0.114,0.095,0.06,0.145,0.184,0.186,0.197,0.06,0.192,0.124,0.224,0.144,0.257,0.214,0.23,0.15,0.216,0.165,0.209,0.148,0.16,0.06,0.123,0.068,0.222,0.228,0.179,0.163,0.12,0.214,0.202,0.233,0.232,0.253,0.254,0.246,0.261,0.28,0.233,0.888,1.0,0.884,0.995,0.908,0.967,0.943,0.946,0.967,0.931,0.978,0.933,0.977,0.92,0.957,0.934,0.96,0.946,0.956,0.934,0.979,0.913,1.0,0.897,1.0,0.907,0.983,0.933,0.954,0.958,0.932,0.981,0.927,0.988,0.92,0.969,0.929,0.876,0.525,0.46,0.497,0.431,0.466,0.994,0.907,1.0,0.905,0.982,0.929,0.968,0.953,0.939,0.98,0.927,0.995,0.915,0.977,0.929,0.962,0.945,0.967,0.939,0.979,0.928,0.986,0.913,0.993,0.907,0.982,0.918,0.979,0.931,0.947,0.97,0.917,0.997,0.905,0.986,0.912,0.885,0.514,0.446,0.451,0.383,0.883,1.0,0.915,0.979,0.953,0.948,0.971,0.951,0.968,0.947,0.954,0.945,0.962,0.947,0.962,0.949,0.955,0.939,0.975,0.915,1.0,0.879,1.0,0.896,0.989,0.936,0.947,0.966,0.942,0.968,0.942,0.963,0.932,0.966,0.947,0.962,0.952,0.959,0.948,0.972,0.924,1.0,0.894,1.0,0.891,0.997,0.93,0.964,0.958,0.936,0.969,0.934,0.967,0.939,0.975,0.932,0.961,0.945,0.96,0.945,0.963,0.922,0.983,0.899,1.0,0.891,1.0,0.913,0.974,0.944,0.942,0.966,0.927,0.975,0.929,0.978,0.931,0.965,0.94,0.961,0.951,0.963,0.94,0.981,0.908]},
+ {id:'boomin-now',title:'Boomin’ Now',credit:'2026 · original',note:'Full track. Press play, or click the waveform to jump.',src:'audio/boomin-now.mp3',dur:355.21,peaks:[0.28,0.245,0.138,0.06,0.1,0.136,0.065,0.06,0.06,0.06,0.103,0.06,0.125,0.277,0.326,0.287,0.2,0.207,0.808,0.85,0.907,0.88,0.834,0.868,0.906,0.875,0.876,0.804,0.924,0.926,0.817,0.829,0.911,0.891,0.842,0.871,0.878,0.914,0.877,0.824,0.923,0.882,0.865,0.852,0.905,0.885,0.867,0.887,0.874,0.917,0.824,0.888,0.91,0.864,0.823,0.885,0.919,0.882,0.878,0.842,0.927,0.908,0.815,0.887,0.918,0.714,0.485,0.539,0.369,0.567,0.607,0.359,0.562,0.474,0.665,0.65,0.677,0.824,0.897,0.963,0.982,0.995,0.871,0.969,0.993,0.954,0.86,0.987,0.982,0.958,0.917,0.955,1.0,0.992,0.86,1.0,0.974,0.963,0.878,1.0,0.975,0.964,0.872,0.95,1.0,0.907,0.908,0.807,0.467,0.74,0.904,0.989,0.976,0.971,0.889,0.998,0.994,0.908,0.862,0.98,0.976,0.933,0.956,0.966,0.999,0.939,0.867,0.999,0.978,0.95,0.935,1.0,0.972,0.93,0.911,0.952,0.994,0.902,0.941,0.992,0.983,0.937,0.928,0.996,0.972,0.943,0.933,0.996,0.994,0.898,0.924,0.965,0.967,0.895,0.96,0.96,0.965,0.899,0.914,1.0,0.978,0.927,0.944,0.984,0.966,0.91,0.949,0.981,1.0,0.882,0.975,1.0,0.987,0.911,0.994,0.992,0.993,0.955,0.981,1.0,1.0,0.883,0.969,0.427,0.41,0.349,0.225,0.273,0.394,0.374,0.219,0.2,0.123,0.35,0.231,0.073,0.062,0.348,0.18,0.395,0.06,0.395,0.259,0.465,0.386,0.078,0.407,0.06,0.384,0.06,0.298,0.303,0.269,0.345,0.06,0.322,0.24,0.436,0.308,0.33,0.526,0.499,0.473,0.377,0.438,0.482,0.451,0.366,0.44,0.45,0.54,0.495,0.436,0.388,0.516,0.427,0.41,0.414,0.853,0.884,0.745,0.436,0.487,0.539,0.57,0.938,0.913,0.733,0.613,0.56,0.533,0.55,0.562,0.533,0.943,0.912,0.819,0.937,0.971,0.94,0.867,0.899,0.981,0.943,0.925,0.909,0.941,0.973,0.841,0.935,0.936,0.974,0.873,0.957,0.941,0.98,0.897,0.906,1.0,0.926,0.915,0.953,0.972,0.804,0.558,0.526,0.53,0.45,0.757,0.878,0.894,0.876,0.791,0.918,0.97,0.914,0.884,0.904,0.947,0.945,0.814,0.964,0.901,0.912,0.831,0.956,0.908,0.91,0.866,0.907,0.97,0.923,0.918,1.0,0.974,0.942,0.886,0.983,0.973,0.95,0.891,0.972,0.972,0.901,0.876,0.963,0.983,0.603,0.429,0.825,0.997,0.939,0.873,1.0,0.955,0.927,0.896,0.979,0.96,0.93,0.908,0.972,1.0,0.912,0.948,0.988,0.961,0.913,0.929,0.995,0.982,0.964,0.918,0.984,0.984,0.87,0.921,0.992,0.983,0.929,0.985,0.972,0.986,0.912,0.897,0.998,0.964,0.913,0.953,0.992,0.957,0.899,0.926,0.948,0.989,0.842,0.9,0.952,0.965,0.871,0.94,0.955,0.944,0.84,0.921,0.957,0.924,0.862,0.954,0.922,0.928,0.84,0.93,0.948,0.902,0.804,0.904,0.939,0.864,0.818,0.926,0.938,0.689,0.185,0.109,0.11,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06]},
+ {id:'zen-fur-elise',title:'Zen Fur Elise',credit:'2025 · original',note:'Full track. Press play, or click the waveform to jump.',src:'audio/zen-fur-elise.mp3',dur:300.56,peaks:[0.992,0.768,0.796,0.897,0.754,0.852,0.818,0.734,0.884,0.764,0.79,0.87,0.748,0.865,0.822,0.729,0.924,0.755,0.762,0.934,0.717,0.861,0.87,0.714,0.919,0.793,0.731,0.953,0.731,0.814,0.899,0.74,0.892,0.835,0.744,0.953,0.76,0.814,0.904,0.757,0.87,0.833,0.759,0.916,0.765,0.796,0.908,0.863,0.919,0.854,0.856,0.977,0.827,0.828,0.97,0.823,0.925,0.946,0.781,0.948,0.854,0.865,0.971,0.83,0.883,0.946,0.87,0.937,0.839,0.851,0.316,0.255,0.442,0.261,0.18,0.422,0.246,0.125,0.412,0.154,0.279,0.358,0.195,0.32,0.355,0.185,0.364,0.32,0.321,0.372,0.409,0.223,0.379,0.771,0.913,0.862,0.857,0.966,0.812,0.865,0.921,0.864,0.977,0.829,0.848,0.964,0.835,0.913,0.908,0.809,0.925,0.906,0.816,0.913,0.819,0.864,0.76,0.193,0.161,0.196,0.06,0.192,0.287,0.12,0.191,0.304,0.16,0.143,0.06,0.113,0.06,0.06,0.06,0.203,0.267,0.214,0.275,0.317,0.343,0.408,0.983,0.837,0.902,0.972,0.811,1.0,0.878,0.886,0.958,0.832,0.835,0.96,0.839,0.938,0.87,0.86,0.987,0.989,0.865,0.977,0.809,0.931,0.929,0.942,0.917,0.844,0.832,0.993,0.94,0.926,0.947,0.866,0.968,0.829,0.842,0.96,0.831,0.903,0.932,0.834,1.0,0.904,0.817,0.941,0.794,0.791,1.0,0.835,0.958,0.853,0.834,0.976,0.962,0.858,0.972,0.811,0.919,0.948,0.809,0.94,0.865,0.852,1.0,0.923,0.908,0.947,0.83,0.954,0.865,0.983,0.951,0.749,0.807,0.907,0.758,1.0,0.815,0.748,0.913,0.754,0.759,0.891,0.718,0.824,0.824,0.716,0.875,0.746,0.06,0.162,0.246,0.318,0.216,0.06,0.06,0.109,0.06,0.06,0.386,0.297,0.06,0.272,0.351,0.06,0.312,1.0,0.805,0.885,0.928,0.871,1.0,0.855,0.814,0.929,0.817,0.869,1.0,0.854,0.934,0.912,0.869,0.963,0.959,0.866,1.0,0.794,0.868,0.901,0.843,0.969,0.888,0.798,0.985,0.962,0.952,0.906,0.845,0.941,0.896,0.981,0.964,0.796,0.914,0.949,0.824,0.986,0.887,0.83,0.972,0.858,0.854,0.95,0.832,0.948,0.878,0.767,0.898,0.976,0.875,0.984,0.782,0.898,0.934,0.976,0.932,0.867,0.834,0.981,0.917,0.855,0.916,0.864,0.972,0.869,0.804,0.729,0.672,0.665,0.697,0.686,0.646,0.62,0.72,0.675,0.571,0.601,0.874,0.86,0.937,0.88,0.855,1.0,0.979,0.846,0.977,0.824,0.91,0.914,0.796,0.97,0.875,0.876,0.981,0.943,0.931,0.964,0.826,0.962,0.854,0.966,0.968,0.862,0.871,0.942,0.824,1.0,0.928,0.841,0.954,0.846,0.893,0.77,0.217,0.109,0.311,0.088,0.317,0.28,0.25,0.344,0.299,0.132,0.259,0.815,0.986,0.867,0.837,0.952,0.922,0.885,0.958,0.854,0.925,0.877,0.855,1.0,0.816,0.884,0.937,0.885,1.0,0.883,0.82,0.96,0.837,0.883,1.0,0.759,0.867,0.851,0.733,0.92,0.991,0.776,0.969,0.772,0.879,0.915,0.06,0.06,0.06,0.06,0.06,0.06,0.092,0.093,0.135,0.06,0.06,0.06]}
+];
+(function(){
+  var audio=new Audio();audio.preload='none';
+  var box=$('tracks'),bar=$('bar'),rows=[],cur=-1,pending=null,raf=0,ENV={};
+  var PLAY='M8 5v14l11-7z',PAUSE='M6 5h4v14H6zM14 5h4v14h-4z';
+  function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function total(i){return (i===cur&&audio.duration&&isFinite(audio.duration))?audio.duration:TRACKS[i].dur}
+  function credit(t){var p=String(t.credit).split(' · ');return p.length===2?p[1].charAt(0).toUpperCase()+p[1].slice(1)+', '+p[0]:t.credit}
+
+  TRACKS.forEach(function(t,i){
+    var el=document.createElement('div');el.className='trk';
+    el.innerHTML='<button class="pbtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+PLAY+'"></path></svg></button>'+
+      '<div class="pbody"><div class="prow"><b></b><span class="pk"></span></div>'+
+      '<div class="pwave" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><canvas aria-hidden="true"></canvas></div>'+
+      '<div class="prow"><span class="ptime">0:00 / '+fmt(t.dur)+'</span></div></div>';
+    var btn=el.querySelector('.pbtn'),wave=el.querySelector('.pwave');
+    el.querySelector('b').textContent=t.title;
+    el.querySelector('.pk').textContent=credit(t);
+    btn.setAttribute('aria-label','Play '+t.title);
+    wave.setAttribute('aria-label','Seek within '+t.title);
+    rows.push({el:el,btn:btn,icon:btn.querySelector('path'),wave:wave,canvas:el.querySelector('canvas'),time:el.querySelector('.ptime')});
+    btn.addEventListener('click',function(){
+      if(i===cur&&!audio.paused)audio.pause();
+      else select(i,true,null);
+    });
+    wave.addEventListener('click',function(e){
+      var b=el.querySelector('canvas').getBoundingClientRect();
+      select(i,true,Math.max(0,Math.min(1,(e.clientX-b.left)/b.width)));
+    });
+    wave.addEventListener('keydown',function(e){
+      var k=e.key,at=(i===cur)?audio.currentTime:0,playing=(i===cur&&!audio.paused);
+      if(k==='ArrowRight'||k==='ArrowUp')select(i,playing,Math.min(1,(at+5)/total(i)));
+      else if(k==='ArrowLeft'||k==='ArrowDown')select(i,playing,Math.max(0,(at-5)/total(i)));
+      else if(k==='Home')select(i,playing,0);
+      else if(k===' '||k==='Enter')btn.click();
+      else return;
+      e.preventDefault();
+    });
+    box.appendChild(el);
+  });
+
+  function drawRow(i){
+    if(i<0||i>=rows.length)return;
+    var t=TRACKS[i],c=rows[i].canvas,w=c.clientWidth,h=56,d=Math.min(window.devicePixelRatio||1,2);
+    if(!w)return;
+    if(c.width!==Math.round(w*d)){c.width=Math.round(w*d);c.height=h*d}
+    var g=c.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);
+    var n=Math.max(40,Math.min(t.peaks.length,Math.floor(w/3))),step=w/n,bw=Math.max(1,step-1);
+    var p=(i===cur)?(audio.currentTime||0)/total(i):0;
+    for(var k=0;k<n;k++){
+      var v=t.peaks[Math.floor(k*t.peaks.length/n)],bh=Math.max(2,v*h*0.92);
+      g.fillStyle=(k/n<p)?HUEHEX:'rgba(241,237,228,.3)';
+      g.fillRect(k*step,(h-bh)/2,bw,bh);
+    }
+  }
+  function drawAll(){for(var i=0;i<rows.length;i++)drawRow(i)}
+
+  function paint(){
+    rows.forEach(function(r,i){
+      var on=(i===cur),playing=(on&&!audio.paused);
+      r.el.classList.toggle('on',on);
+      r.icon.setAttribute('d',playing?PAUSE:PLAY);
+      r.btn.setAttribute('aria-label',(playing?'Pause ':'Play ')+TRACKS[i].title);
+      if(on){
+        r.time.textContent=fmt(audio.currentTime)+' / '+fmt(total(i));
+        var pc=Math.round((audio.currentTime||0)/total(i)*100)||0;
+        r.wave.setAttribute('aria-valuenow',pc);
+        r.wave.setAttribute('aria-valuetext',fmt(audio.currentTime)+' of '+fmt(total(i)));
+      }else{
+        r.time.textContent='0:00 / '+fmt(TRACKS[i].dur);
+        r.wave.setAttribute('aria-valuenow',0);
+      }
+    });
+    if(cur>-1){
+      var t=TRACKS[cur];
+      $('b-title').textContent=t.title;
+      $('b-credit').textContent=credit(t);
+      $('b-time').textContent=fmt(audio.currentTime)+' / '+fmt(total(cur));
+      var pct=((audio.currentTime||0)/total(cur))*100||0;
+      $('b-line').style.setProperty('--p',pct+'%');
+      $('b-line').setAttribute('aria-valuenow',Math.round(pct));
+      $('b-line').setAttribute('aria-valuetext',fmt(audio.currentTime)+' of '+fmt(total(cur))+', '+t.title);
+      $('b-icon').setAttribute('d',audio.paused?PLAY:PAUSE);
+      $('b-play').setAttribute('aria-label',audio.paused?('Play '+t.title):('Pause '+t.title));
+    }
+    drawRow(cur);
+  }
+  function tick(){paint();if(!audio.paused)raf=requestAnimationFrame(tick)}
+
+  function loadEnv(i){
+    var t=TRACKS[i];
+    if(ENV[t.id]!==undefined||!window.fetch)return;
+    ENV[t.id]=null;
+    fetch(t.src.replace(/\.mp3$/,'.env.json')).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+      var dec=function(s){var b=atob(s),u=new Uint8Array(b.length);for(var k=0;k<b.length;k++)u[k]=b.charCodeAt(k);return u};
+      ENV[t.id]={fps:j.fps,lo:dec(j.lo),hi:dec(j.hi)};
+    }).catch(function(){});
+  }
+  /* read by the sky every frame: fast attack on the kick, slow release */
+  audioLevel=function(){
+    var lo=0,hi=0;
+    if(cur>-1&&!audio.paused){
+      var t=TRACKS[cur],e=ENV[t.id],ct=audio.currentTime||0;
+      if(e){var f=ct*e.fps,i=Math.floor(f),u=f-i;if(i<e.lo.length-1){lo=(e.lo[i]*(1-u)+e.lo[i+1]*u)/255;hi=(e.hi[i]*(1-u)+e.hi[i+1]*u)/255}}
+      else{lo=hi=.3*t.peaks[Math.min(t.peaks.length-1,Math.floor(ct/total(cur)*t.peaks.length))]}
+    }
+    N.pulse+=(lo-N.pulse)*(lo>N.pulse?.5:.09);
+    N.air+=(hi-N.air)*.18;
+  };
+
+  function select(i,play,ratio){
+    var switching=(i!==cur);
+    if(switching){
+      cur=i;audio.src=TRACKS[i].src;pending=(ratio!=null)?ratio:0;audio.load();loadEnv(i);
+    }else if(ratio!=null){
+      if(audio.duration&&isFinite(audio.duration))audio.currentTime=ratio*audio.duration;
+      else pending=ratio;
+    }
+    bar.hidden=false;document.body.classList.add('hasbar');
+    if(play)audio.play().then(function(){},function(){toast('Playback was blocked. Press play again.')});
+    if(switching)drawAll();
+    paint();
+  }
+
+  audio.addEventListener('loadedmetadata',function(){
+    if(pending!=null){try{audio.currentTime=pending*audio.duration}catch(e){}pending=null}
+    paint();
+  });
+  audio.addEventListener('play',function(){cancelAnimationFrame(raf);tick()});
+  audio.addEventListener('pause',function(){cancelAnimationFrame(raf);paint()});
+  audio.addEventListener('timeupdate',function(){if(audio.paused)paint()});
+  audio.addEventListener('ended',function(){
+    if(cur<TRACKS.length-1)select(cur+1,true,0);
+    else{audio.currentTime=0;paint()}
+  });
+  audio.addEventListener('error',function(){if(cur>-1)toast('That track could not be loaded.')});
+
+  $('b-play').addEventListener('click',function(){
+    if(cur<0)return select(0,true,0);
+    if(audio.paused)audio.play().then(function(){},function(){toast('Playback was blocked. Press play again.')});
+    else audio.pause();
+  });
+  $('b-next').addEventListener('click',function(){select((cur+1)%TRACKS.length,!audio.paused,0)});
+  $('b-prev').addEventListener('click',function(){
+    if(cur<0)return;
+    if(audio.currentTime>3)return select(cur,!audio.paused,0);
+    select((cur-1+TRACKS.length)%TRACKS.length,!audio.paused,0);
+  });
+  $('b-close').addEventListener('click',function(){
+    audio.pause();bar.hidden=true;document.body.classList.remove('hasbar');
+    cur=-1;drawAll();paint();
+  });
+  $('b-line').addEventListener('click',function(e){
+    if(cur<0)return;var b=this.getBoundingClientRect();
+    select(cur,!audio.paused,Math.max(0,Math.min(1,(e.clientX-b.left)/b.width)));
+  });
+  $('b-line').addEventListener('keydown',function(e){
+    if(cur<0)return;var k=e.key;
+    if(k==='ArrowRight')select(cur,!audio.paused,Math.min(1,(audio.currentTime+5)/total(cur)));
+    else if(k==='ArrowLeft')select(cur,!audio.paused,Math.max(0,(audio.currentTime-5)/total(cur)));
+    else return;
+    e.preventDefault();
+  });
+  window.addEventListener('resize',drawAll);
+  drawAll();
+})();
+
+/* GALLERY: [file, description, width, height]. Columns are balanced by height, then drift at different speeds. */
+var G=[
+ ['g-coat','Studio portrait, crouched in a white coat and wide-brimmed hat',1800,2400],
+ ['g-bw','Black and white, at the decks',1800,1341],
+ ['g-dragon','Studio portrait in an embroidered dragon jacket',1179,1510],
+ ['g-playa','ZENTI seated on a sculpture on the playa',1800,1784],
+ ['p-hat','Portrait in a wide-brimmed hat',1500,3074],
+ ['g-purple','Mixing in purple light',1800,1581],
+ ['p-sculpt','Standing on a steel sculpture at night',1500,3068],
+ ['g-altar','A gong ceremony at a candlelit altar stage',1800,1578]
+];
+var gal=$('gal'),gi=0,lb=$('lb'),lastBtn=null,galCols=[],galN=0;
+var galBtns=G.map(function(p,i){
+  var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','View photo: '+p[1]);
+  var im=document.createElement('img');im.src='img/'+p[0]+'.jpg';im.alt=p[1];im.loading='lazy';im.width=p[2];im.height=p[3];
+  b.appendChild(im);b.addEventListener('click',function(){lastBtn=b;show(i);lb.classList.add('open');$('lb-x').focus()});
+  return b;
+});
+function buildGal(){
+  var n=(root.clientWidth<=860)?2:3;
+  if(n===galN)return;
+  galN=n;gal.textContent='';galCols=[];
+  var hs=[],k;
+  for(k=0;k<n;k++){var c=document.createElement('div');c.className='col';gal.appendChild(c);galCols.push(c);hs.push(0)}
+  G.forEach(function(p,i){var m=0;for(k=1;k<n;k++)if(hs[k]<hs[m]-.01)m=k;galCols[m].appendChild(galBtns[i]);hs[m]+=p[3]/p[2]});
+}
+buildGal();
+function show(i){gi=(i+G.length)%G.length;$('lb-img').src='img/'+G[gi][0]+'.jpg';$('lb-img').alt=G[gi][1];$('lb-cap').textContent=(gi+1)+' of '+G.length+'. '+G[gi][1]}
+function closeLb(){lb.classList.remove('open');if(lastBtn)lastBtn.focus()}
+$('lb-x').addEventListener('click',closeLb);
+$('lb-pv').addEventListener('click',function(){show(gi-1)});
+$('lb-nx').addEventListener('click',function(){show(gi+1)});
+lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')show(gi-1);if(e.key==='ArrowRight')show(gi+1)});
+
+/* JOURNEY: the dial. Picking a slot redraws the energy arc and relights the sky behind the page. */
+var Journey=(function(){
+  var jr=$('jr'),c=$('jr-canvas'),g=c.getContext('2d'),range=$('jr-range'),ticks=$('jr-ticks'),sel=2,from=SLOTS[2].pts.slice(),shown=from.slice(),mt=1,vis=true;
+  SLOTS.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.textContent=s.k;b.addEventListener('click',function(){range.value=i;pick(i)});ticks.appendChild(b)});
+  function f(pts,u){var n=pts.length-1,x=Math.min(n-1e-6,u*n),i=Math.floor(x),m=(1-Math.cos((x-i)*Math.PI))/2;return pts[i]*(1-m)+pts[i+1]*m}
+  function pick(i){
+    from=shown.slice();sel=i;mt=fx?0:1;N.jr=i;var s=SLOTS[i];
+    jr.style.setProperty('--slot',s.c);
+    $('jr-k').textContent=s.k;$('jr-t').textContent=s.t;$('jr-d').textContent=s.d;$('jr-proof').textContent=s.proof;
+    $('jr-tags').textContent=s.tags.join(', ');
+    range.setAttribute('aria-valuetext',s.k);
+    ticks.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')});
+    if(!fx){draw(0);requestStill()}
+  }
+  function draw(t){
+    var d=Math.min(window.devicePixelRatio||1,2),w=c.clientWidth,h=c.clientHeight;
+    if(!w||!h)return;
+    if(c.width!==Math.round(w*d)||c.height!==Math.round(h*d)){c.width=Math.round(w*d);c.height=Math.round(h*d)}
+    g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);
+    var s=SLOTS[sel],pad=2,top=30,bot=h-34,u,q;
+    if(mt<1)mt=Math.min(1,mt+.035);var e=1-Math.pow(1-mt,3);
+    for(var i=0;i<shown.length;i++)shown[i]=from[i]+(s.pts[i]-from[i])*e;
+    var Y=function(u){return bot-(bot-top)*f(shown,u)},X=function(u){return pad+(w-pad*2)*u};
+    g.strokeStyle='rgba(241,237,228,.12)';g.lineWidth=1;for(var k=0;k<4;k++){var gy=Math.round(top+(bot-top)*k/3)+.5;g.beginPath();g.moveTo(pad,gy);g.lineTo(w-pad,gy);g.stroke()}
+    g.beginPath();g.moveTo(X(0),bot);for(u=0;u<=1.0001;u+=.01)g.lineTo(X(u),Y(u));g.lineTo(X(1),bot);g.closePath();
+    var gr=g.createLinearGradient(0,top,0,bot);gr.addColorStop(0,s.c+'66');gr.addColorStop(1,s.c+'00');g.fillStyle=gr;g.fill();
+    g.beginPath();for(u=0;u<=1.0001;u+=.01){u===0?g.moveTo(X(u),Y(u)):g.lineTo(X(u),Y(u))}g.strokeStyle=s.c;g.lineWidth=2;g.stroke();
+    var pu=fx?((t/7000)%1):1;
+    for(q=0;q<14;q++){var tu=pu-q*.012;if(tu<0)continue;g.fillStyle=s.c;g.globalAlpha=(1-q/14)*.5;g.beginPath();g.arc(X(tu),Y(tu),4-q*.2,0,6.28);g.fill()}
+    g.globalAlpha=1;g.shadowColor=s.c;g.shadowBlur=18;g.fillStyle='#F1EDE4';g.beginPath();g.arc(X(pu),Y(pu),5,0,6.28);g.fill();g.shadowBlur=0;
+    g.fillStyle='#948E83';g.font='500 13px "Instrument Sans", Arial, sans-serif';g.textBaseline='alphabetic';
+    g.textAlign='left';g.fillText('First track',pad,h-10);g.textAlign='right';g.fillText('Last track',w-pad,h-10);
+    g.textAlign='left';g.fillText('Energy',pad,16);
+  }
+  range.addEventListener('input',function(){pick(+range.value)});
+  $('jr-book').addEventListener('click',function(){$('b-slot').value=SLOTS[sel].k;$('book').scrollIntoView({behavior:fx?'smooth':'auto'});toast(SLOTS[sel].k+' slot added to your request')});
+  pick(2);
+  var api={draw:draw,vis:true};
+  if('IntersectionObserver' in window)new IntersectionObserver(function(en){api.vis=en[0].isIntersecting}).observe(c);
+  return api;
+})();
+
+/* RIDER */
+$('rider-copy').addEventListener('click',function(){copy('ZENTI technical rider (DJ set)\n\nCDJs: Pioneer CDJ-3000 or CDJ-2000NXS2, at least 2 decks, linked\nMixer: Pioneer DJM-V10, A9 or 900NXS2\nSound: proper booth monitors, high quality PA with sub\n\nIf you have something else, please let us know.\nContact: zentimusic@gmail.com','Rider copied')});
+
+/* BOOKING */
+var v=function(id){return $(id).value.trim()};
+$('bk').addEventListener('submit',function(e){
+  e.preventDefault();
+  var d=v('b-date'),date='';
+  if(d){var p=d.split('-');date=new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})}
+  var rows=[['Event',v('b-ev')],['Date',date],['City',v('b-city')],['Type',v('b-type')],['Slot',v('b-slot')==='Not sure yet'?'':v('b-slot')],['Set length',v('b-len')]].filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n');
+  var msg='Hi Thomas,\n\nI’d like to book ZENTI.\n\n'+rows+(v('b-msg')?'\n\n'+v('b-msg'):'')+(v('b-name')?'\n\n'+v('b-name'):'');
+  $('b-text').textContent=msg;
+  $('b-mail').href='mailto:zentimusic@gmail.com?subject='+encodeURIComponent('ZENTI booking inquiry'+(v('b-ev')?': '+v('b-ev'):''))+'&body='+encodeURIComponent(msg);
+  $('b-out').classList.add('show');
+});
+$('b-copy').addEventListener('click',function(){copy($('b-text').textContent,'Message copied')});
+$('addr-copy').addEventListener('click',function(){copy($('b-addr').textContent,'Address copied')});
+
+/* ============================================================================================
+   THE SKY (Three.js): one full-screen shader for sun, dunes, haze and beams, plus two point clouds
+   for dust and the LED rows from the booth photo. Everything reads N.hour, so scroll and the dial
+   move the same night. If WebGL or the library is missing, the CSS wash underneath stays.
+   ============================================================================================ */
+var Sky=(function(){
+  var cv=$('sky'),R=null,scene,cam,U,MU,LU,pr=1,ready=false,slowN=0,slowAcc=0;
+  var QV='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
+  var QF=[
+  'uniform vec2 uRes;uniform float uTime;uniform float uHour;uniform float uPulse;uniform float uScroll;uniform vec2 uPtr;uniform vec3 uHue;',
+  'varying vec2 vUv;',
+  'float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}',
+  'float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+  'float fbm(vec2 p){float a=.5;float s=0.;for(int i=0;i<4;i++){s+=a*noise(p);p=p*2.03+vec2(17.1,9.2);a*=.5;}return s;}',
+  'void main(){',
+  '  float asp=uRes.x/uRes.y;',
+  '  vec2 p=vec2((vUv.x-.5)*asp,vUv.y-.5);',
+  '  float day=clamp(max(1.-uHour/.85,(uHour-3.35)/.65),0.,1.);',   /* 1 at sunset and at sunrise, 0 through the night */
+  '  float night=1.-day;',
+  '  float ph=(uHour-2.)/.95;float peak=exp(-ph*ph);',
+  '  float rise=step(2.,uHour);',                                    /* which side of the night we are on */
+  '  vec3 zen=vec3(.039,.039,.043);',
+  '  vec3 warm=mix(uHue,vec3(1.,.93,.82),.22);',
+  '  float hz=mix(-.30,-.34,rise)+uPtr.y*.006;',
+  '  float ridge=hz+.05*(fbm(vec2(p.x*1.4+3.+rise*7.,1.))-.5)+.012*(noise(vec2(p.x*9.,4.))-.5);',
+  '  float y=p.y-ridge;',
+  '  vec2 sun=vec2(mix(.30,0.,rise)*asp+uPtr.x*.01,hz+mix(-.36,mix(.085,.03,rise),day));',
+  '  float sd=length(p-sun);',
+  '  vec3 col=zen;',
+  '  col+=warm*exp(-max(y,0.)*mix(6.,3.4,day))*(.04+.34*day);',      /* light hugging the horizon */
+  '  col+=uHue*.05*(1.-vUv.y)*(.5+.5*night);',                       /* so the room is never dead black */
+  '  float sunOn=smoothstep(0.,.2,day);',
+  '  col+=mix(uHue,vec3(1.,.74,.42),.55)*smoothstep(.07,.062,sd)*.62*sunOn;',
+  '  col+=warm*(exp(-sd*5.)*.3+exp(-sd*15.)*.36)*sunOn;',
+  '  vec2 q=p*vec2(1.15,1.9)+vec2(uTime*.011,-uTime*.006+uScroll*.16);',
+  '  float hf=fbm(q+fbm(q*1.7+uTime*.009)*.9);',                     /* booth haze, lit by the hour, nudged by the kick */
+  '  col+=uHue*smoothstep(.34,.86,hf)*(.035+.10*night+.07*uPulse*night);',
+  '  float beams=0.;',
+  '  for(int i=0;i<4;i++){',                                          /* four slow beams from the rig, strongest at peak hour */
+  '    float fi=float(i);',
+  '    vec2 o=vec2((fi-1.5)*.34*asp,.64);',
+  '    float a=-1.5708+sin(uTime*(.06+.013*fi)+fi*1.9)*.5+(fi-1.5)*.1;',
+  '    vec2 dir=vec2(cos(a),sin(a));',
+  '    vec2 r=p-o;float t=dot(r,dir);float perp=abs(r.x*dir.y-r.y*dir.x);',
+  '    float w=.012+.075*max(t,0.);float pw=perp/w;',
+  '    beams+=exp(-pw*pw)*smoothstep(0.,.1,t)*exp(-t*.85)*(.65+.35*sin(fi*2.4+1.));',
+  '  }',
+  '  col+=mix(uHue,vec3(1.),.14)*beams*night*(.045+.2*peak)*(.75+.55*uPulse)*(.45+.95*hf);',
+  '  vec3 ground=zen*.82+warm*.05*day*exp(y*7.)+warm*day*.13*exp(-abs(p.x-sun.x)*6.)*exp(y*4.5)*sunOn;',
+  '  col=mix(col,ground,smoothstep(.003,-.003,y)*smoothstep(0.,.25,day));',
+  '  vec2 vp=p*vec2(.7,1.);col*=1.-.3*dot(vp,vp);',
+  '  col+=(hash(gl_FragCoord.xy+fract(uTime)*91.7)-.5)*(1.6/255.);', /* dither, so the dark gradients do not band */
+  '  gl_FragColor=vec4(col,1.);',
+  '}'].join('\n');
+  var MV=[
+  'attribute vec3 aSeed;',
+  'uniform float uTime;uniform float uScrollY;uniform float uPixel;uniform float uNight;uniform float uAir;',
+  'varying float vA;',
+  'void main(){',
+  '  vec3 p=position;',
+  '  float depth=(p.z+30.)/31.;',
+  '  p.y=mod(p.y+uScrollY*(.5+depth*2.2)+uTime*.04*(.4+aSeed.x)+10.,20.)-10.;',  /* scrolling lifts the dust; nearer motes travel further */
+  '  p.x+=sin(uTime*.1+aSeed.y*6.283)*.3;',
+  '  vec4 mv=modelViewMatrix*vec4(p,1.);',
+  '  gl_Position=projectionMatrix*mv;',
+  '  float tw=.55+.45*sin(uTime*(.5+aSeed.x)+aSeed.y*40.);',
+  '  gl_PointSize=uPixel*(1.4+3.6*aSeed.z*aSeed.z)*(10./max(1.,-mv.z));',
+  '  vA=tw*(.22+.78*uNight)*(.55+.9*uAir)*smoothstep(0.,4.,-mv.z);',
+  '}'].join('\n');
+  var MF='uniform vec3 uHue;varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,0.,d);a*=a;gl_FragColor=vec4(mix(vec3(.95,.93,.89),uHue,.35),a*vA*.9);}';
+  var LV=[
+  'attribute vec3 aCenter;attribute vec3 aRow;',
+  'uniform float uTime;uniform float uScrollY;uniform float uPixel;uniform float uNight;uniform float uPulse;',
+  'varying float vA;',
+  'void main(){',
+  '  vec3 c=aCenter;',
+  '  float depth=(c.z+25.)/20.;',
+  '  c.y=mod(c.y+uScrollY*(.5+depth*1.5)+16.,32.)-16.;',              /* whole rows wrap together */
+  '  vec4 mv=modelViewMatrix*vec4(c+position,1.);',
+  '  gl_Position=projectionMatrix*mv;',
+  '  float chase=.5+.5*sin(uTime*1.3-aRow.z*5.+aRow.x*2.3+aRow.y*.9);',
+  '  gl_PointSize=uPixel*150./max(1.,-mv.z);',
+  '  vA=uNight*(.14+.28*chase+.42*uPulse)*smoothstep(36.,12.,-mv.z);',
+  '}'].join('\n');
+  var LF='uniform vec3 uHue;varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,.4,d)*(.6+.4*smoothstep(.2,.46,d));gl_FragColor=vec4(mix(vec3(1.,.96,.9),uHue,.3),a*vA);}';
+
+  function init(){
+    if(ready||!window.THREE||!vw)return;
+    var T=window.THREE,small=vw<760,i;
+    try{R=new T.WebGLRenderer({canvas:cv,antialias:false,alpha:false,powerPreference:'high-performance'})}catch(e){R=null;cv.style.display='none';return}
+    pr=Math.min(window.devicePixelRatio||1,small?1:1.5);
+    scene=new T.Scene();cam=new T.PerspectiveCamera(55,1,.1,120);cam.position.set(0,0,6);
+    U={uRes:{value:new T.Vector2(1,1)},uTime:{value:0},uHour:{value:0},uPulse:{value:0},uScroll:{value:0},uPtr:{value:new T.Vector2(0,0)},uHue:{value:new T.Vector3(1,.6,.3)}};
+    var quad=new T.Mesh(new T.PlaneGeometry(2,2),new T.ShaderMaterial({uniforms:U,vertexShader:QV,fragmentShader:QF,depthTest:false,depthWrite:false}));
+    quad.frustumCulled=false;quad.renderOrder=0;scene.add(quad);
+
+    MU={uTime:U.uTime,uHue:U.uHue,uScrollY:{value:0},uPixel:{value:1},uNight:{value:0},uAir:{value:0}};
+    var n=small?700:2400,pos=new Float32Array(n*3),seed=new Float32Array(n*3);
+    for(i=0;i<n;i++){pos[i*3]=(Math.random()*2-1)*17;pos[i*3+1]=(Math.random()*2-1)*10;pos[i*3+2]=-30+Math.random()*31;seed[i*3]=Math.random();seed[i*3+1]=Math.random();seed[i*3+2]=Math.random()}
+    var mg=new T.BufferGeometry();mg.setAttribute('position',new T.BufferAttribute(pos,3));mg.setAttribute('aSeed',new T.BufferAttribute(seed,3));
+    var motes=new T.Points(mg,new T.ShaderMaterial({uniforms:MU,vertexShader:MV,fragmentShader:MF,transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending}));
+    motes.frustumCulled=false;motes.renderOrder=1;scene.add(motes);
+
+    /* LED rows: three parallel lines of nine dots, hung at an angle, as in the booth photo */
+    LU={uTime:U.uTime,uHue:U.uHue,uScrollY:MU.uScrollY,uPixel:MU.uPixel,uNight:MU.uNight,uPulse:U.uPulse};
+    var groups=small?6:13,rows=3,dots=11,ln=groups*rows*dots,lp=new Float32Array(ln*3),lc=new Float32Array(ln*3),lr=new Float32Array(ln*3),k=0,gI,r,d;
+    for(gI=0;gI<groups;gI++){
+      var side=gI%2?1:-1,cz=-5-Math.random()*20,cx=side*(.5+Math.random()*.6)*.52*(6-cz)*Math.max(1,vw/Math.max(1,vh)),cy=(Math.random()*2-1)*15,an=(.5+Math.random()*.45)*(Math.random()<.5?1:-1),ca=Math.cos(an),sa=Math.sin(an);
+      for(r=0;r<rows;r++)for(d=0;d<dots;d++){
+        var a=(d-(dots-1)/2)*.46,b=(r-1)*.95;
+        lp[k*3]=ca*a-sa*b;lp[k*3+1]=sa*a+ca*b;lp[k*3+2]=0;
+        lc[k*3]=cx;lc[k*3+1]=cy;lc[k*3+2]=cz;
+        lr[k*3]=gI;lr[k*3+1]=r;lr[k*3+2]=d/(dots-1);k++;
+      }
+    }
+    var lg=new T.BufferGeometry();lg.setAttribute('position',new T.BufferAttribute(lp,3));lg.setAttribute('aCenter',new T.BufferAttribute(lc,3));lg.setAttribute('aRow',new T.BufferAttribute(lr,3));
+    var leds=new T.Points(lg,new T.ShaderMaterial({uniforms:LU,vertexShader:LV,fragmentShader:LF,transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending}));
+    leds.frustumCulled=false;leds.renderOrder=2;scene.add(leds);
+    ready=true;resize();
+    if(!fx)requestStill();
+  }
+  function resize(){
+    if(!ready)return;
+    R.setPixelRatio(pr);R.setSize(vw,vh,false);
+    cam.aspect=vw/Math.max(1,vh);cam.updateProjectionMatrix();
+    U.uRes.value.set(vw,vh);MU.uPixel.value=pr*vh/900;
+  }
+  function render(t,dt){
+    if(!ready)return;
+    var h=N.hour,day=clamp(Math.max(1-h/.85,(h-3.35)/.65),0,1);
+    U.uTime.value=fx?t*.001:12;U.uHour.value=h;U.uPulse.value=N.pulse;U.uScroll.value=cur/Math.max(1,vh);
+    U.uPtr.value.set(N.px,N.py);U.uHue.value.set(HUE[0]/255,HUE[1]/255,HUE[2]/255);
+    MU.uScrollY.value=cur/Math.max(1,vh)*2;MU.uNight.value=1-day;MU.uAir.value=N.air;
+    cam.position.x=N.px*.7;cam.position.y=-N.py*.4;cam.lookAt(0,0,-14);
+    R.render(scene,cam);
+    /* if a machine cannot hold the frame rate, give up resolution before smoothness */
+    if(fx&&dt){slowAcc+=dt;slowN++;if(slowN>=90){var avg=slowAcc/slowN;slowN=0;slowAcc=0;if(avg>30&&pr>.55){pr=Math.max(.5,pr*.75);resize()}}}
+  }
+  return {init:init,resize:resize,render:render};
+})();
+
+/* FOREGROUND DUST: a few soft out-of-focus motes in front of the page that pass faster than the content. Wide screens only. */
+var Dust=(function(){
+  var cv=$('dust'),g=null,sp=null,P=[],w=0,h=0,on=false;
+  function resize(){
+    on=geo.wide&&vw>=900;cv.style.display=on?'':'none';
+    if(!on)return;
+    g=g||cv.getContext('2d');w=vw;h=vh;if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+    if(!P.length)for(var i=0;i<26;i++)P.push({x:Math.random(),y:Math.random(),r:16+Math.random()*64,z:1.3+Math.random()*1.9,a:.025+Math.random()*.055,p:Math.random()*6.28});
+    if(!sp){sp=document.createElement('canvas');sp.width=sp.height=128;var s=sp.getContext('2d'),gr=s.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(241,237,228,1)');gr.addColorStop(.55,'rgba(241,237,228,.5)');gr.addColorStop(1,'rgba(241,237,228,0)');s.fillStyle=gr;s.fillRect(0,0,128,128)}
+  }
+  function render(t){
+    if(!on)return;
+    g.clearRect(0,0,w,h);
+    var span=h*1.5;
+    for(var i=0;i<P.length;i++){
+      var p=P[i],y=((p.y*span-cur*p.z*.22+Math.sin(t*.0002+p.p)*30)%span+span)%span-h*.25,x=p.x*w+Math.sin(t*.00013+p.p*2)*40-N.px*18*p.z;
+      g.globalAlpha=p.a*(.75+.5*N.pulse);g.drawImage(sp,x-p.r,y-p.r,p.r*2,p.r*2);
+    }
+    g.globalAlpha=1;
+  }
+  return {resize:resize,render:render};
+})();
+
+/* SUNRISE SCRUB: 96 frames of a real desert dawn, drawn to a canvas and tied to scroll.
+   Frame 1 paints first, the rest load six at a time, and the frame index is damped so it glides.
+   Phones load every second frame. If the frames are missing, a painted gradient stands in. */
+var Dawn=(function(){
+  var stage=$('dawn-stage'),cv=$('dawn-canvas'),g=cv.getContext('2d'),copyEl=$('dawn-copy');
+  var TOTAL=96,stride=1,count=TOTAL,frames=[],queue=[],inflight=0,started=false,proc=false,curF=0,lastDraw=-1,cw=0,ch=0;
+  function src(i){var n=i*stride+1;return 'frames/dawn-'+(n<10?'00':n<100?'0':'')+n+'.webp'}
+  function resize(){
+    var d=Math.min(window.devicePixelRatio||1,1.5);cw=Math.round(stage.clientWidth*d);ch=Math.round(stage.clientHeight*d);
+    if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch;lastDraw=-1}
+  }
+  function load(i){
+    if(frames[i])return;
+    var im=new Image();frames[i]=im;inflight++;
+    im.onload=function(){im.ok=true;inflight--;lastDraw=-1;pump();if(!fx)requestStill()};
+    im.onerror=function(){inflight--;if(!proc){proc=true;lastDraw=-1}pump();if(!fx)requestStill()};
+    im.decoding='async';im.src=src(i);
+  }
+  function pump(){while(inflight<6&&queue.length)load(queue.shift())}
+  function start(){
+    if(started)return;started=true;
+    stride=(vw<=760)?2:1;count=Math.floor((TOTAL-1)/stride)+1;
+    queue=[];
+    if(fx){for(var i=0;i<count;i++)queue.push(i)}else queue.push(count-1);   /* without motion only the last frame is needed */
+    pump();
+  }
+  function nearest(i){for(var k=0;k<count;k++){var a=i-k,b=i+k;if(a>=0&&frames[a]&&frames[a].ok)return a;if(b<count&&frames[b]&&frames[b].ok)return b}return -1}
+  function cover(im){var s=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*s,h=im.naturalHeight*s;g.drawImage(im,(cw-w)/2,(ch-h)*.62,w,h)}
+  function paint(p){   /* stand-in when no frames are available */
+    var m=function(a,b){return 'rgb('+Math.round(lerp(a[0],b[0],p))+','+Math.round(lerp(a[1],b[1],p))+','+Math.round(lerp(a[2],b[2],p))+')'};
+    var gr=g.createLinearGradient(0,0,0,ch);
+    gr.addColorStop(0,m([9,9,24],[112,104,122]));gr.addColorStop(.5,m([20,16,40],[214,150,120]));gr.addColorStop(.6,m([120,52,20],[246,176,92]));gr.addColorStop(.605,m([8,7,8],[60,36,28]));gr.addColorStop(1,m([6,6,7],[30,20,18]));
+    g.fillStyle=gr;g.fillRect(0,0,cw,ch);
+  }
+  function step(){
+    if(!geo.dawnH)return;
+    if(!started&&cur+vh*3.5>geo.dawnT)start();
+    var enter=(cur+vh-geo.dawnT)/vh;
+    if(enter<-.2||cur>geo.dawnT+geo.dawnH+40)return;
+    var p=fx?clamp((cur-geo.dawnT)/Math.max(1,geo.dawnH-vh),0,1):1;
+    var tf=p*(count-1);
+    if(fx){curF+=(tf-curF)*.2;if(Math.abs(tf-curF)<.01)curF=tf}else curF=tf;
+    var idx=Math.round(curF);
+    if(proc){if(idx!==lastDraw){paint(idx/Math.max(1,count-1));lastDraw=idx}}
+    else{var k=nearest(idx);if(k>-1&&k!==lastDraw){cover(frames[k]);lastDraw=k}}
+    if(fx){
+      cv.style.opacity=smooth(.05,.85,enter).toFixed(3);                 /* the footage surfaces out of the 3D sky */
+      var a=smooth(.26,.58,p);stage.style.setProperty('--a',a.toFixed(3));copyEl.style.opacity=a.toFixed(3);copyEl.style.transform='translate3d(0,'+((1-a)*46).toFixed(1)+'px,0)';
+    }
+  }
+  return {resize:resize,step:step,start:start};
+})();
+
+/* ============================================================================================
+   THE ENGINE: one loop. Scroll is damped once and every moving thing reads the damped value,
+   so layers stay in step. Positions are measured on resize, never per frame.
+   ============================================================================================ */
+var SEC=[['top',0,0],['bio',1,1],['journey',null,null],['experience',2.2,2.4],['listen',2.5,2.8],['photos',3,3.2],['rider',3.45,3.55],['dawn',3.7,4],['book',4,4]];
+var heroMedia=$('hero-media'),haze=$('haze'),heroCopy=$('hero-copy'),frameEl=$('bio-frame'),frameImg=frameEl.querySelector('img'),billView=$('bill-view'),billTrack=$('bill'),figs=[].slice.call(billTrack.children).map(function(el){return {el:el,cx:0}});
+var nav=$('nav'),hourDot=$('hour-dot'),hourK=$('hour-k');
+var GS=[-.04,.035,-.02],GS2=[-.05,.05];
+var heads=[].slice.call(document.querySelectorAll('.sec .head')),stableH=0;
+var dirty=true,last=0,raf=0,ptx=0,pty=0,hueT=0,navSolid=null,hourName='';
+function docTop(el){return el.getBoundingClientRect().top+(window.pageYOffset||0)}
+function measure(){
+  dirty=false;
+  vw=root.clientWidth;vh=window.innerHeight;
+  geo.wide=fx&&vw>860;root.classList.toggle('wide',geo.wide);
+  geo.move=fx;root.classList.toggle('move',geo.move);
+  geo.heads=heads.map(function(b){return {el:b,t:docTop(b.parentNode)+b.offsetTop,h:b.offsetHeight}});
+  stableH=vh;
+  buildGal();
+  geo.pts=[];
+  SEC.forEach(function(s){
+    var el=$(s[0]);if(!el)return;
+    var t=docTop(el),h=el.offsetHeight,m=Math.min(h,vh)*.5,a=t+m,b=t+h-m;
+    if(b<a)a=b=t+h/2;
+    geo.pts.push([a,s[1]],[b,s[2]]);
+  });
+  geo.heroH=$('top').offsetHeight;
+  geo.frT=docTop(frameEl);geo.frH=frameEl.offsetHeight;
+  geo.galT=docTop(gal);geo.galH=gal.offsetHeight;
+  geo.billT=docTop(billView);geo.billH=billView.offsetHeight;geo.trackW=billTrack.offsetWidth;
+  figs.forEach(function(f){f.cx=f.el.offsetLeft+f.el.offsetWidth/2});
+  geo.dawnT=docTop($('dawn'));geo.dawnH=$('dawn').offsetHeight;
+  if(!geo.move){billTrack.style.transform='';figs.forEach(function(f){f.el.style.transform=''})}
+  if(!geo.move)galCols.forEach(function(c){c.style.transform=''});
+  if(!geo.move)heads.forEach(function(h){h.style.transform=''});
+  Sky.init();Sky.resize();Dust.resize();Dawn.resize();
+}
+function hv(p){return p[1]===null?N.jr:p[1]}
+function hourAt(c){
+  var P=geo.pts,i;
+  if(!P.length)return 0;
+  if(c<=P[0][0])return hv(P[0]);
+  for(i=1;i<P.length;i++)if(c<=P[i][0]){var a=P[i-1],b=P[i],u=(c-a[0])/Math.max(1,b[0]-a[0]);return lerp(hv(a),hv(b),u)}
+  return hv(P[P.length-1]);
+}
+function paintHue(t){
+  HUE=hueAt(N.hour);var hx=hex(HUE);
+  if(hx!==HUEHEX&&(!fx||t-hueT>70)){HUEHEX=hx;hueT=t;root.style.setProperty('--hue',hx)}
+}
+function paintNav(sy){
+  var s=sy>40;if(s!==navSolid){navSolid=s;nav.classList.toggle('solid',s)}
+  var u=clamp(N.hour/4,0,1)*Math.PI;hourDot.setAttribute('cx',(24-21*Math.cos(u)).toFixed(2));hourDot.setAttribute('cy',(22-18*Math.sin(u)).toFixed(2));
+  var k=SLOTS[clamp(Math.round(N.hour),0,SLOTS.length-1)].k;if(k!==hourName){hourName=k;hourK.textContent=k}
+}
+function parallax(){
+  var H=geo.heroH,c=cur+vh*.5;
+  if(cur<H+60){
+    var u=cur/Math.max(1,H);
+    heroMedia.style.transform='translate3d('+(-N.px*14).toFixed(2)+'px,'+(cur*.24-N.py*10).toFixed(2)+'px,0) scale('+(1.05+u*.07).toFixed(4)+')';
+    haze.style.transform='translate3d('+(-N.px*30).toFixed(2)+'px,'+(cur*-.1-N.py*18).toFixed(2)+'px,0)';
+    heroCopy.style.transform='translate3d('+(N.px*6).toFixed(2)+'px,'+(cur*-.12).toFixed(2)+'px,0)';
+    heroCopy.style.opacity=clamp(1-u*1.5,0,1).toFixed(3);
+  }
+  var d=(geo.frT+geo.frH*.5-c)/(vh*.5+geo.frH*.5);
+  if(d>-1.3&&d<1.3)frameImg.style.transform='translate3d(0,'+(-7.6-clamp(d,-1,1)*7.6).toFixed(3)+'%,0)';
+  if(geo.move){
+    var g=geo.galT+geo.galH*.5-c,gs=geo.wide?GS:GS2;
+    if(Math.abs(g)<vh+geo.galH*.5)for(var i=0;i<galCols.length;i++)galCols[i].style.transform='translate3d(0,'+(g*gs[i%gs.length]).toFixed(2)+'px,0)';
+    var hk=geo.wide?.05:.035;
+    for(var j=0;j<geo.heads.length;j++){var hd=geo.heads[j],e=hd.t+hd.h*.5-c;if(Math.abs(e)<vh*1.2)hd.el.style.transform='translate3d(0,'+(clamp(e,-vh,vh)*hk).toFixed(2)+'px,0)'}
+  }
+}
+/* the flyers hang on a curved wall that slides sideways as the page moves */
+function billStep(){
+  if(!geo.move)return;
+  var p=(cur+vh-geo.billT)/(vh+geo.billH);
+  if(p<-.15||p>1.15)return;
+  p=clamp(p,0,1);
+  var travel=Math.max(0,geo.trackW-vw),tx=travel?lerp(vw*.08,-travel-vw*.02,p):0;
+  billTrack.style.transform='translate3d('+tx.toFixed(2)+'px,0,0)';
+  for(var i=0;i<figs.length;i++){
+    var f=figs[i],n=clamp((f.cx+tx-vw*.5)/(vw*.5),-1.3,1.3);
+    f.el.style.transform=geo.wide?'translate3d(0,0,'+(n*n*70).toFixed(1)+'px) rotateY('+(n*-16).toFixed(2)+'deg)':'translate3d(0,'+(n*n*14).toFixed(1)+'px,0) rotateY('+(n*-11).toFixed(2)+'deg) scale('+(1-Math.min(.12,n*n*.08)).toFixed(3)+')';
+  }
+}
+function step(t){
+  if(dirty)measure();
+  var dt=last?Math.min(80,t-last):16.7;last=t;
+  var sy=window.pageYOffset||0;
+  if(fx&&fine){cur+=(sy-cur)*(1-Math.pow(.86,dt/16.7));if(Math.abs(sy-cur)<.1)cur=sy}else cur=sy;
+  var target=hourAt(cur+vh*.5);
+  if(fx){N.hour+=(target-N.hour)*(1-Math.pow(.93,dt/16.7));if(Math.abs(target-N.hour)<.002)N.hour=target}else N.hour=target;
+  N.px+=(ptx-N.px)*.06;N.py+=(pty-N.py)*.06;
+  audioLevel();
+  paintHue(t);paintNav(sy);
+  if(fx){parallax();billStep()}
+  Dawn.step();
+  Sky.render(t,dt);Dust.render(t);
+  if(fx&&Journey.vis)Journey.draw(t);
+}
+function loop(t){raf=requestAnimationFrame(loop);step(t)}
+var stillQueued=false;
+requestStill=function(){if(fx||stillQueued)return;stillQueued=true;requestAnimationFrame(function(t){stillQueued=false;step(t);Journey.draw(0)})};
+
+window.addEventListener('resize',function(){
+  if(!fine&&root.clientWidth===vw&&Math.abs(window.innerHeight-stableH)<170){vh=window.innerHeight;return}
+  dirty=true;requestStill();
+});
+if('ResizeObserver' in window)new ResizeObserver(function(){dirty=true;requestStill()}).observe(document.querySelector('main'));
+window.addEventListener('load',function(){dirty=true;requestStill();setTimeout(Dawn.start,3500)});
+if(fx){
+  if(fine)window.addEventListener('pointermove',function(e){if(e.pointerType==='mouse'&&vw){ptx=e.clientX/vw*2-1;pty=e.clientY/Math.max(1,vh)*2-1}},{passive:true});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}
+    else if(!raf){last=0;raf=requestAnimationFrame(loop)}
+  });
+  raf=requestAnimationFrame(loop);
+  /* live haze over the booth photo; rests when the hero is off screen */
+  var playHaze=function(){var p=haze.play();if(p&&p.catch)p.catch(function(){})};
+  playHaze();
+  if('IntersectionObserver' in window)new IntersectionObserver(function(en){if(en[0].isIntersecting)playHaze();else haze.pause()}).observe($('top'));
+}else{
+  window.addEventListener('scroll',requestStill,{passive:true});
+  requestStill();
+}
+
+/* Three.js arrives on its own schedule; the page never waits for it */
+(function(){var s=$('three-js');if(window.THREE){dirty=true;requestStill()}else if(s)s.addEventListener('load',function(){dirty=true;requestStill()})})();
+
+/* release covers tilt toward the pointer */
+if(fx&&fine)[].forEach.call(document.querySelectorAll('#rels figure'),function(f){
+  var im=f.querySelector('img');
+  f.addEventListener('pointermove',function(e){var r=im.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;im.style.transition='transform .12s linear';im.style.transform='rotateY('+(x*14).toFixed(2)+'deg) rotateX('+(-y*14).toFixed(2)+'deg) scale(1.03)'});
+  f.addEventListener('pointerleave',function(){im.style.transition='';im.style.transform=''});
+});
+
+/* film grain, generated once, shared by the sky and the photographs */
+(function(){
+  try{
+    var c=document.createElement('canvas');c.width=c.height=160;var g=c.getContext('2d'),d=g.createImageData(160,160),i,v;
+    for(i=0;i<d.data.length;i+=4){v=Math.random()*255|0;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=Math.random()*150|0}
+    g.putImageData(d,0,0);$('grain').style.backgroundImage='url('+c.toDataURL('image/png')+')';
+  }catch(e){}
+})();
+})();
+</script>
 </body>
 </html>
