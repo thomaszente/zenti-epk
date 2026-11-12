@@ -297,6 +297,10 @@ form>.btn{justify-self:start;cursor:pointer}
 .out pre{font-family:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;color:var(--bone-dim);line-height:1.6;margin:0}
 .out small{color:var(--bone-mute);font-size:var(--t-s)}
 .acts{display:flex;flex-wrap:wrap;gap:10px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sent{font-family:var(--display);font-size:var(--t-l);line-height:1.3;color:var(--bone);margin:0}
+.formwarn{color:var(--hue);font-size:var(--t-s);margin:0}
+.btn[disabled]{opacity:.55;cursor:default}
 @media (max-width:860px){.book{grid-template-columns:1fr}}
 @media (max-width:640px){.row3{grid-template-columns:1fr}}
 @media (max-width:480px){.row2{grid-template-columns:1fr}}
@@ -531,26 +535,30 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
       <form id="bk" novalidate>
         <div class="row2">
           <div class="field"><label for="b-name">Your name</label><input id="b-name" autocomplete="name"></div>
-          <div class="field"><label for="b-ev">Event or venue</label><input id="b-ev"></div>
+          <div class="field"><label for="b-email">Your email</label><input id="b-email" type="email" autocomplete="email"></div>
         </div>
         <div class="row2">
-          <div class="field"><label for="b-date">Date</label><input id="b-date" type="date"></div>
+          <div class="field"><label for="b-ev">Event or venue</label><input id="b-ev"></div>
           <div class="field"><label for="b-city">City</label><input id="b-city"></div>
         </div>
         <div class="row3">
+          <div class="field"><label for="b-date">Date</label><input id="b-date" type="date"></div>
           <div class="field"><label for="b-slot">Slot</label>
             <select id="b-slot"><option>Not sure yet</option><option>Sunset</option><option>Opening</option><option>Peak hour</option><option>After hours</option><option>Sunrise</option></select></div>
-          <div class="field"><label for="b-type">Type of booking</label>
-            <select id="b-type"><option>Club night</option><option>Festival</option><option>Private or brand event</option><option>Retreat or gathering</option><option>Guest mix or podcast</option></select></div>
           <div class="field"><label for="b-len">Set length</label>
             <select id="b-len"><option>60 minutes</option><option>90 minutes</option><option selected>2 hours</option><option>3 hours or more</option><option>Not sure yet</option></select></div>
         </div>
+        <div class="field"><label for="b-type">Type of booking</label>
+          <select id="b-type"><option>Club night</option><option>Festival</option><option>Private or brand event</option><option>Retreat or gathering</option><option>Guest mix or podcast</option></select></div>
         <div class="field"><label for="b-msg">Lineup, capacity, anything else</label><textarea id="b-msg"></textarea></div>
-        <button class="btn solid" type="submit">Prepare booking request</button>
+        <div class="hp" aria-hidden="true"><label for="b-co">Company</label><input id="b-co" tabindex="-1" autocomplete="off"></div>
+        <button class="btn solid" type="submit" id="b-send">Send booking request</button>
+        <p class="formwarn" id="b-warn" hidden></p>
         <div class="out" id="b-out" role="status" aria-live="polite">
+          <p class="sent" id="b-sent" hidden></p>
           <pre id="b-text"></pre>
-          <div class="acts"><button class="btn line sm" type="button" id="b-copy">Copy message</button><a class="btn line sm" id="b-mail" href="#">Open in email</a></div>
-          <small>This page cannot send email itself. Copy the message, or open it in your mail app, and send it to zentimusic@gmail.com.</small>
+          <div class="acts" id="b-acts"><button class="btn line sm" type="button" id="b-copy">Copy message</button><a class="btn line sm" id="b-mail" href="#">Open in email</a></div>
+          <small id="b-note">This page could not send the message itself. Copy it, or open it in your mail app, and send it to zentimusic@gmail.com.</small>
         </div>
       </form>
     </div>
@@ -963,15 +971,45 @@ $('rider-copy').addEventListener('click',function(){copy('ZENTI technical rider 
 
 /* BOOKING */
 var v=function(id){return $(id).value.trim()};
+var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 $('bk').addEventListener('submit',function(e){
   e.preventDefault();
   var d=v('b-date'),date='';
   if(d){var p=d.split('-');date=new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})}
-  var rows=[['Event',v('b-ev')],['Date',date],['City',v('b-city')],['Type',v('b-type')],['Slot',v('b-slot')==='Not sure yet'?'':v('b-slot')],['Set length',v('b-len')]].filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n');
-  var msg='Hi Thomas,\n\nI’d like to book ZENTI.\n\n'+rows+(v('b-msg')?'\n\n'+v('b-msg'):'')+(v('b-name')?'\n\n'+v('b-name'):'');
+  var slot=v('b-slot')==='Not sure yet'?'':v('b-slot');
+  var rows=[['Event',v('b-ev')],['Date',date],['City',v('b-city')],['Type',v('b-type')],['Slot',slot],['Set length',v('b-len')]].filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n');
+  var msg='Hi Thomas,\n\nI\u2019d like to book ZENTI.\n\n'+rows+(v('b-msg')?'\n\n'+v('b-msg'):'')+(v('b-name')?'\n\n'+v('b-name'):'')+(v('b-email')?'\n'+v('b-email'):'');
   $('b-text').textContent=msg;
   $('b-mail').href='mailto:zentimusic@gmail.com?subject='+encodeURIComponent('ZENTI booking inquiry'+(v('b-ev')?': '+v('b-ev'):''))+'&body='+encodeURIComponent(msg);
-  $('b-out').classList.add('show');
+
+  var warn=$('b-warn'),btn=$('b-send'),email=v('b-email');
+  function reset(){btn.disabled=false;btn.textContent='Send booking request'}
+  function showWarn(t){warn.textContent=t;warn.hidden=false;$('b-out').classList.remove('show')}
+  /* No inbox behind the form, or it refused: hand the message to their mail app. */
+  function fallback(){
+    reset();warn.hidden=true;
+    $('b-sent').hidden=true;$('b-text').hidden=false;$('b-acts').hidden=false;$('b-note').hidden=false;
+    $('b-out').classList.add('show');
+  }
+  if(!EMAIL_RE.test(email))return showWarn('Please add an email address so Thomas can reply.');
+  warn.hidden=true;btn.disabled=true;btn.textContent='Sending\u2026';
+
+  fetch('/api/booking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    name:v('b-name'),email:email,event:v('b-ev'),date:date,city:v('b-city'),
+    slot:slot,type:v('b-type'),length:v('b-len'),message:v('b-msg'),company:v('b-co')
+  })}).then(function(r){
+    return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok&&j.ok,status:r.status,error:j.error}});
+  }).then(function(res){
+    reset();
+    if(res.ok){
+      $('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';
+      $('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;
+      $('b-out').classList.add('show');
+      return;
+    }
+    if(res.status===400&&res.error)return showWarn(res.error);
+    fallback();
+  },fallback);
 });
 $('b-copy').addEventListener('click',function(){copy($('b-text').textContent,'Message copied')});
 $('addr-copy').addEventListener('click',function(){copy($('b-addr').textContent,'Address copied')});

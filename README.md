@@ -15,7 +15,7 @@ There is no build step and no dependencies to install.
 | `audio/` | The four original tracks as MP3, each with a `.env.json` waveform. |
 | `frames/` | 96 webp stills for the dawn sequence. |
 | `video/` | The haze clip and its poster frame. |
-| `api/booking.js` | Serverless function that can email booking inquiries (see below). |
+| `api/booking.mjs` | Serverless function that emails booking inquiries (see below). |
 | `vercel.json` | Vercel settings: no build, serve from the repository root, cache headers. |
 | `netlify.toml` | The equivalent for Netlify, kept so the site can deploy to either host. |
 | `scripts/check-assets.py` | Verifies every file the page references is committed. |
@@ -40,15 +40,21 @@ serves the repository root, so a push is live within a minute.
 
 ## The booking form
 
-The form currently composes a message and hands it to the visitor's mail app.
+The form posts to `api/booking.mjs`, a Vercel Serverless Function that emails
+the inquiry through [Resend](https://resend.com), with the sender's address as
+reply-to. A hidden field catches most bots.
 
-`api/booking.js` is a Vercel Serverless Function that can email inquiries
-straight to the inbox instead, through [Resend](https://resend.com). It is in
-the repository but the page does not call it yet. To switch it on, add
-`RESEND_API_KEY` under the Vercel project's Environment Variables, redeploy,
-and wire the form to POST to `/api/booking`.
+Set `RESEND_API_KEY` under the Vercel project's Environment Variables to switch
+it on, then redeploy — environment variables only reach a new build. Until that
+key is set the function answers 503 and the form falls back to handing the
+message to the visitor's own mail app, so the page works either way.
 
 Optional variables: `BOOKING_TO` (defaults to `zentimusic@gmail.com`) and
-`BOOKING_FROM` (must be a domain verified with Resend).
+`BOOKING_FROM`, which must be on a domain verified with Resend. Until you verify
+one, leave it unset and Resend sends from its own address, which can only
+deliver to your Resend account address.
+
+The file is `.mjs` rather than `.js` so Vercel reads it as an ES module; there
+is no `package.json` in this repository to declare that.
 
 Never commit credentials or `.env` files. This repository is public.
