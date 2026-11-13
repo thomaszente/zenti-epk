@@ -330,6 +330,123 @@ footer a:hover{color:var(--bone)}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--bone);color:var(--stage);padding:11px 18px;border-radius:2px;font-size:var(--t-s);font-weight:600;z-index:90;display:none;max-width:calc(100vw - 32px)}
 .toast.show{display:block}
 body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+
+
+/* ==========================================================================================
+   REFINEMENT LAYER (November 2026). Everything above is the original build, untouched.
+   Black and white first; the hour's accent is held to gold, silver and a quiet violet.
+   Delete this block to return to the original look.
+   ========================================================================================== */
+:root{--bone-mute:#A29C91;--rule:#2A2927;--track:.16em}
+
+/* 2. a darker room: the sky and the dust step back, type loses its halo */
+.sky{opacity:.58}
+.dust{opacity:.4}
+.grain{opacity:.05}
+main{text-shadow:none}
+.dawn-copy{text-shadow:0 1px 30px rgba(10,10,11,.7)}
+
+/* 5. type: small labels become tracked capitals, small print gets larger and lighter */
+.nav ul a,.hour span,.hero .kit,.facts dt,label,.mixes .k,.prow .pk,.jr-info .slot,.group h3 small,.binfo span,.lists .go,.mixes .go{font-size:11.5px;letter-spacing:var(--track);text-transform:uppercase;font-weight:500}
+.nav ul a{color:var(--bone-dim)}
+.nav ul{gap:28px}
+.jr-info .slot{font-weight:600}
+.names li i{font-size:11px;letter-spacing:.08em}
+.head p{font-size:18px;line-height:1.55}
+.biotext p,.jr-info p,.pintro{line-height:1.7}
+.bill-track figcaption,.rels figcaption span,.lists span{font-size:14px}
+
+/* 1. colour discipline: the main action is bone on black, the accent is for small things */
+.btn{border-radius:0;font-size:12px;letter-spacing:var(--track);text-transform:uppercase;font-weight:600;padding:16px 26px}
+.btn.sm{padding:12px 18px;font-size:11.5px}
+.btn.solid{background:var(--bone);color:var(--stage);border-color:var(--bone)}
+.btn.solid:hover{background:transparent;color:var(--bone)}
+.btn.line{border-color:rgba(241,237,228,.3)}
+.btn.line:hover{border-color:var(--bone);color:var(--bone)}
+input,select,textarea{border-radius:0;border-color:rgba(241,237,228,.18)}
+.bbtn.main{border-color:rgba(241,237,228,.4);color:var(--bone)}
+.bbtn.main:hover{background:var(--bone);color:var(--stage)}
+
+/* 3. the hero in true black and white */
+.hero-media>img{filter:grayscale(1) contrast(1.06)}
+.hero-media::after{opacity:.16}
+.hero-media video{opacity:.4}
+.hero-copy{gap:20px;padding-bottom:56px}
+.hero h1 img{width:min(430px,64vw)}
+.dmm{font-size:clamp(28px,3.9vw,52px);font-weight:400;margin-top:14px}
+.hero .tag{font-size:clamp(19px,2vw,26px);margin-top:-6px}
+.hero .cta{margin-top:18px}
+.hero .btn.line{background:rgba(10,10,11,.35);-webkit-backdrop-filter:none;backdrop-filter:none}
+.facts{padding-block:26px 34px;gap:0 36px}
+.facts dt{margin-bottom:6px}
+.facts dd{font-size:15px;line-height:1.5}
+
+/* 4. editorial structure: more air, numbered sections, hairlines */
+.sec{padding-block:clamp(72px,10vw,152px)}
+.head{gap:16px;margin-bottom:clamp(32px,4vw,56px)}
+main{counter-reset:sec}
+.sec h2{counter-increment:sec}
+.sec h2::before{display:block;font-family:var(--text);font-variation-settings:normal;font-size:11.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;line-height:1;color:var(--hue);margin-bottom:clamp(18px,2vw,28px);content:counter(sec,decimal-leading-zero)}
+#bio h2::before{content:"01  \2014  Biography";content:"01  \2014  Biography" / ""}
+#journey h2::before{content:"02  \2014  The set";content:"02  \2014  The set" / ""}
+#experience h2::before{content:"03  \2014  Experience";content:"03  \2014  Experience" / ""}
+#listen h2::before{content:"04  \2014  Listen";content:"04  \2014  Listen" / ""}
+#photos h2::before{content:"05  \2014  Images";content:"05  \2014  Images" / ""}
+#rider h2::before{content:"06  \2014  Technical";content:"06  \2014  Technical" / ""}
+.sec h2::before{white-space:pre}
+.sub{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--bone-dim);border-top:1px solid var(--rule);padding-top:20px;margin:clamp(52px,6.5vw,88px) 0 22px}
+.bill-head{border-top:1px solid var(--rule);margin-top:clamp(52px,6.5vw,88px);padding-top:14px;align-items:center;margin-bottom:18px}
+.bill-head .sub{border:0;margin:0;padding:0}
+.bill-nav{margin-bottom:0}
+.credits{gap:30px 36px;margin-bottom:clamp(36px,5vw,60px)}
+.bio h2{margin-bottom:28px}
+.biobar{margin-bottom:26px}
+.nudge{margin-top:clamp(40px,5vw,64px)}
+
+/* 6. the flyers: monochrome at the edges, in colour as each one crosses the middle */
+.bill-track img{box-shadow:none}
+.move .bill-track img{filter:grayscale(1) brightness(.7) contrast(1.05);transition:filter .7s var(--ease)}
+.move .bill-track figure.near img,.move .bill-track figure:hover img{filter:none}
+.move .bill-track figcaption{opacity:.55;transition:opacity .7s var(--ease)}
+.move .bill-track figure.near figcaption,.move .bill-track figure:hover figcaption{opacity:1}
+
+/* 7. press photos and the portrait read as one black and white set; colour returns on hover */
+.frame img{filter:grayscale(1)}
+.gal img{filter:grayscale(1);transition:transform .8s var(--ease),filter .6s var(--ease)}
+.gal button:hover img,.gal button:focus-visible img{filter:none}
+.gal{gap:18px}.gal .col{gap:18px}
+.rels img,.lists img{box-shadow:none}
+
+/* 8. the dial: one hairline, no rainbow, no glow */
+.dial input[type=range]::-webkit-slider-runnable-track{background:rgba(241,237,228,.26);height:1px}
+.dial input[type=range]::-moz-range-track{background:rgba(241,237,228,.26);height:1px}
+.dial input[type=range]::-webkit-slider-thumb{width:16px;height:16px;border:0;background:var(--bone);box-shadow:0 0 0 5px var(--stage),0 0 0 6px var(--slot);margin-top:-8px}
+.dial input[type=range]::-moz-range-thumb{width:14px;height:14px;border:0;background:var(--bone);box-shadow:0 0 0 5px var(--stage),0 0 0 6px var(--slot)}
+.ticks button{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+.ticks button[aria-pressed="true"]{color:var(--bone)}
+@media (max-width:860px){.ticks button{font-size:10px;letter-spacing:.03em}.facts{gap:22px 24px}}
+.pbtn{border-color:rgba(241,237,228,.28)}
+.trk{padding:20px 0}
+
+/* 10. lighter to paint: no blur behind the large panels */
+.book{background:rgba(10,10,11,.9);-webkit-backdrop-filter:none;backdrop-filter:none;border-color:var(--rule)}
+
+/* 9. phone: a real menu, and controls big enough for a thumb */
+.menu-btn{display:none;font-size:11.5px;letter-spacing:var(--track);text-transform:uppercase;font-weight:600;color:var(--bone);padding:12px 4px;min-height:44px}
+.menu{position:fixed;inset:0;z-index:39;background:var(--stage);padding:calc(104px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-left,0px)) calc(32px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto}
+.menu ol{counter-reset:m;display:grid}
+.menu li{counter-increment:m;border-top:1px solid var(--rule)}
+.menu li:last-child{border-bottom:1px solid var(--rule)}
+.menu li a{display:flex;align-items:baseline;gap:18px;padding:15px 0;text-decoration:none;font-family:var(--display);font-variation-settings:"SOFT" 70;font-weight:400;font-size:clamp(30px,8.4vw,44px);line-height:1.1;letter-spacing:-.015em}
+.menu li a::before{content:counter(m,decimal-leading-zero);font-family:var(--text);font-variation-settings:normal;font-size:11.5px;letter-spacing:.2em;color:var(--bone-mute);width:2.2em}
+.menu p{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:28px;font-size:15px;color:var(--bone-dim)}
+.menu p a{text-underline-offset:5px}
+.menu-lock,.menu-lock body{overflow:hidden}
+.nav.menu-open{background:var(--stage);border-bottom-color:var(--rule)}
+@media (max-width:980px){.menu-btn{display:block}.nav .wrap{gap:16px}}
+@media (min-width:981px){.menu{display:none}}
+@media (pointer:coarse){.seg button,.filter button{min-height:44px;padding-inline:2px}.ticks button{min-height:44px}.lb button{min-height:48px}}
+@media (max-width:430px){.nav .btn.sm{padding:11px 13px}}
 </style>
 <script>
 /* Motion is opt-out: mark the page before first paint so the hero opens once, cleanly. */
@@ -357,9 +474,22 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
       <svg viewBox="0 0 48 26" width="48" height="26"><path d="M3 22A21 18 0 0 1 45 22" fill="none" stroke="currentColor" stroke-opacity=".4"/><path d="M0 22.5H48" stroke="currentColor" stroke-opacity=".4"/><circle id="hour-dot" cx="3" cy="22" r="3.2" fill="var(--hue)"/></svg>
       <span id="hour-k">Sunset</span>
     </div>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
     <a class="btn solid sm" href="#book">Book ZENTI</a>
   </div>
 </header>
+<nav class="menu" id="menu" aria-label="Sections" hidden>
+  <ol>
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#rider">Rider</a></li>
+    <li><a href="#book">Booking</a></li>
+  </ol>
+  <p><a href="mailto:zentimusic@gmail.com">zentimusic@gmail.com</a><a href="https://instagram.com/zentimusic">@zentimusic</a></p>
+</nav>
 
 <main>
 <section class="hero" id="top">
@@ -659,11 +789,11 @@ function copy(text,done){
 
 /* THE NIGHT: five slots, one colour each. The whole page reads its hour from here. */
 var SLOTS=[
- {k:'Sunset',c:'#E9A45C',t:'Let them arrive.',d:'Worldly rhythms, organic percussion and warm, unhurried grooves. Music for golden light and a floor that is still finding itself.',tags:['Organic house','World music','Slow-burn grooves'],proof:'Festival daylight sets at Envision, Costa Rica.',pts:[.18,.24,.32,.38,.46,.52,.6,.66]},
- {k:'Opening',c:'#D9825E',t:'Set the table.',d:'Deep and patient. Builds the room step by step and hands the headliner a warm floor, never a tired one.',tags:['Deep house','Hypnotic','Steady build'],proof:'Opened for WhoMadeWho at The Concourse Project. Support for Lee Burridge and Bedouin at Kingdom.',pts:[.14,.2,.28,.36,.45,.55,.66,.76]},
- {k:'Peak hour',c:'#E0566F',t:'Earn the big moments.',d:'Melodic techno drive with funk in the low end. Tension, release, and the track nobody saw coming.',tags:['Melodic techno','Driving','Funk-laced'],proof:'A 3 hour set alongside Maceo Plex at The Concourse Project.',pts:[.5,.62,.74,.6,.82,.94,.78,.9]},
- {k:'After hours',c:'#8D7BEA',t:'Keep the floor that stays.',d:'Hypnotic and unpredictable. Long blends, strange turns, and deep pockets for the dancers who are in it until the end.',tags:['Deep and trippy','Long blends','Left turns'],proof:'10 pm to 5 am at Do Not Sit On The Furniture, Miami Beach.',pts:[.7,.62,.72,.56,.66,.5,.58,.44]},
- {k:'Sunrise',c:'#F0B7A0',t:'Lift as the light comes up.',d:'Emotive and cinematic. Melodies that open slowly and land right as the sky turns.',tags:['Emotive','Cinematic','Melodic house'],proof:'Caravan of Light at Burning Man.',pts:[.34,.3,.38,.46,.58,.7,.82,.74]}
+ {k:'Sunset',c:'#C9A96E',t:'Let them arrive.',d:'Worldly rhythms, organic percussion and warm, unhurried grooves. Music for golden light and a floor that is still finding itself.',tags:['Organic house','World music','Slow-burn grooves'],proof:'Festival daylight sets at Envision, Costa Rica.',pts:[.18,.24,.32,.38,.46,.52,.6,.66]},
+ {k:'Opening',c:'#CDBB93',t:'Set the table.',d:'Deep and patient. Builds the room step by step and hands the headliner a warm floor, never a tired one.',tags:['Deep house','Hypnotic','Steady build'],proof:'Opened for WhoMadeWho at The Concourse Project. Support for Lee Burridge and Bedouin at Kingdom.',pts:[.14,.2,.28,.36,.45,.55,.66,.76]},
+ {k:'Peak hour',c:'#D2D0D6',t:'Earn the big moments.',d:'Melodic techno drive with funk in the low end. Tension, release, and the track nobody saw coming.',tags:['Melodic techno','Driving','Funk-laced'],proof:'A 3 hour set alongside Maceo Plex at The Concourse Project.',pts:[.5,.62,.74,.6,.82,.94,.78,.9]},
+ {k:'After hours',c:'#9D93C4',t:'Keep the floor that stays.',d:'Hypnotic and unpredictable. Long blends, strange turns, and deep pockets for the dancers who are in it until the end.',tags:['Deep and trippy','Long blends','Left turns'],proof:'10 pm to 5 am at Do Not Sit On The Furniture, Miami Beach.',pts:[.7,.62,.72,.56,.66,.5,.58,.44]},
+ {k:'Sunrise',c:'#D8CDBD',t:'Lift as the light comes up.',d:'Emotive and cinematic. Melodies that open slowly and land right as the sky turns.',tags:['Emotive','Cinematic','Melodic house'],proof:'Caravan of Light at Burning Man.',pts:[.34,.3,.38,.46,.58,.7,.82,.74]}
 ];
 var PAL=SLOTS.map(function(s){var n=parseInt(s.c.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255]});
 function hueAt(h){h=clamp(h,0,PAL.length-1);var i=Math.min(PAL.length-2,Math.floor(h)),u=h-i,a=PAL[i],b=PAL[i+1];return [lerp(a[0],b[0],u),lerp(a[1],b[1],u),lerp(a[2],b[2],u)]}
@@ -984,11 +1114,11 @@ var Journey=(function(){
     var Y=function(u){return bot-(bot-top)*f(shown,u)},X=function(u){return pad+(w-pad*2)*u};
     g.strokeStyle='rgba(241,237,228,.12)';g.lineWidth=1;for(var k=0;k<4;k++){var gy=Math.round(top+(bot-top)*k/3)+.5;g.beginPath();g.moveTo(pad,gy);g.lineTo(w-pad,gy);g.stroke()}
     g.beginPath();g.moveTo(X(0),bot);for(u=0;u<=1.0001;u+=.01)g.lineTo(X(u),Y(u));g.lineTo(X(1),bot);g.closePath();
-    var gr=g.createLinearGradient(0,top,0,bot);gr.addColorStop(0,s.c+'66');gr.addColorStop(1,s.c+'00');g.fillStyle=gr;g.fill();
-    g.beginPath();for(u=0;u<=1.0001;u+=.01){u===0?g.moveTo(X(u),Y(u)):g.lineTo(X(u),Y(u))}g.strokeStyle=s.c;g.lineWidth=2;g.stroke();
+    var gr=g.createLinearGradient(0,top,0,bot);gr.addColorStop(0,s.c+'24');gr.addColorStop(1,s.c+'00');g.fillStyle=gr;g.fill();
+    g.beginPath();for(u=0;u<=1.0001;u+=.01){u===0?g.moveTo(X(u),Y(u)):g.lineTo(X(u),Y(u))}g.strokeStyle=s.c;g.lineWidth=1.25;g.stroke();
     var pu=fx?((t/7000)%1):1;
-    for(q=0;q<14;q++){var tu=pu-q*.012;if(tu<0)continue;g.fillStyle=s.c;g.globalAlpha=(1-q/14)*.5;g.beginPath();g.arc(X(tu),Y(tu),4-q*.2,0,6.28);g.fill()}
-    g.globalAlpha=1;g.shadowColor=s.c;g.shadowBlur=18;g.fillStyle='#F1EDE4';g.beginPath();g.arc(X(pu),Y(pu),5,0,6.28);g.fill();g.shadowBlur=0;
+    for(q=0;q<14;q++){var tu=pu-q*.012;if(tu<0)continue;g.fillStyle=s.c;g.globalAlpha=(1-q/14)*.28;g.beginPath();g.arc(X(tu),Y(tu),4-q*.2,0,6.28);g.fill()}
+    g.globalAlpha=1;g.fillStyle='#F1EDE4';g.beginPath();g.arc(X(pu),Y(pu),5,0,6.28);g.fill();g.shadowBlur=0;
     g.fillStyle='#948E83';g.font='500 13px "Instrument Sans", Arial, sans-serif';g.textBaseline='alphabetic';
     g.textAlign='left';g.fillText('First track',pad,h-10);g.textAlign='right';g.fillText('Last track',w-pad,h-10);
     g.textAlign='left';g.fillText('Energy',pad,16);
@@ -999,6 +1129,19 @@ var Journey=(function(){
   var api={draw:draw,vis:true};
   if('IntersectionObserver' in window)new IntersectionObserver(function(en){api.vis=en[0].isIntersecting}).observe(c);
   return api;
+})();
+
+/* PHONE MENU */
+(function(){
+  var btn=$('menu-btn'),menu=$('menu'),navEl=$('nav');
+  function set(open){
+    menu.hidden=!open;btn.setAttribute('aria-expanded',open?'true':'false');btn.textContent=open?'Close':'Menu';
+    navEl.classList.toggle('menu-open',open);document.documentElement.classList.toggle('menu-lock',open);
+  }
+  btn.addEventListener('click',function(){set(menu.hidden)});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){set(false);btn.focus()}});
+  window.addEventListener('resize',function(){if(window.innerWidth>980&&!menu.hidden)set(false)});
 })();
 
 /* RIDER */
@@ -1389,7 +1532,8 @@ function billStep(){
   if(atE!==bill.atE){bill.atE=atE;billNext.disabled=atE}
   billTrack.style.transform='translate3d('+tx.toFixed(2)+'px,0,0)';
   for(var i=0;i<figs.length;i++){
-    var f=figs[i],n=clamp((f.cx+tx-vw*.5)/(vw*.5),-1.3,1.3);
+    var f=figs[i],n=clamp((f.cx+tx-vw*.5)/(vw*.5),-1.3,1.3),near=Math.abs(n)<(geo.wide?.46:.5);
+    if(near!==f.near){f.near=near;f.el.classList.toggle('near',near)}
     f.el.style.transform=geo.wide?'translate3d(0,0,'+(n*n*70).toFixed(1)+'px) rotateY('+(n*-16).toFixed(2)+'deg)':'translate3d(0,'+(n*n*14).toFixed(1)+'px,0) rotateY('+(n*-11).toFixed(2)+'deg) scale('+(1-Math.min(.12,n*n*.08)).toFixed(3)+')';
   }
 }
