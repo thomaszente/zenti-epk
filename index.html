@@ -186,7 +186,15 @@ label{font-size:var(--t-s);color:var(--bone-dim)}
 .bill-track img{width:100%;height:auto;aspect-ratio:1/1.1;object-fit:cover;object-position:top;box-shadow:0 34px 60px -34px #000}
 .bill-track figcaption{font-size:var(--t-s);color:var(--bone-mute);line-height:1.45}
 .bill-track figcaption b{display:block;color:var(--bone);font-weight:500;font-size:15px}
-.move .bill-view{overflow:hidden}
+.move .bill-view{overflow:hidden;touch-action:pan-y;cursor:grab}
+.move .bill-view.drag{cursor:grabbing;user-select:none}
+.bill-view img{-webkit-user-drag:none;user-select:none}
+.bill-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.bill-nav{display:flex;gap:8px;margin-bottom:14px}
+.bill-nav button{width:42px;height:42px;padding:0;display:grid;place-items:center;border:1px solid rgba(241,237,228,.36);border-radius:50%;background:none;color:var(--bone);cursor:pointer;transition:border-color .25s,color .25s,opacity .25s}
+.bill-nav button:hover{border-color:var(--hue);color:var(--hue)}
+.bill-nav button[disabled]{opacity:.3;cursor:default;border-color:rgba(241,237,228,.36);color:var(--bone)}
+.bill-nav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
 .move .bill-track{will-change:transform}
 .move .bill-track figure{will-change:transform}
 .move .sec .head{will-change:transform}
@@ -437,7 +445,13 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
       <div class="filter" id="xchips" role="group" aria-label="Show"></div>
     </div>
     <div id="xlist"></div>
-    <h3 class="sub">On the bill</h3>
+    <div class="bill-head">
+      <h3 class="sub">On the bill</h3>
+      <div class="bill-nav">
+        <button type="button" id="bill-prev" aria-label="Previous flyers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" id="bill-next" aria-label="Next flyers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
   </div>
   <div class="bill-view" id="bill-view">
     <div class="bill-track" id="bill">
@@ -1304,12 +1318,54 @@ function parallax(){
   }
 }
 /* the flyers hang on a curved wall that slides sideways as the page moves */
+var bill={off:0,to:0,drag:false,atS:null,atE:null},billPrev=$('bill-prev'),billNext=$('bill-next');
+function billNudge(dir){
+  var w=figs.length?figs[0].el.offsetWidth+20:260,n=vw>860?2:1;
+  if(geo.move)bill.to-=dir*w*n;
+  else billView.scrollBy({left:dir*w*n,behavior:'smooth'});
+}
+billPrev.addEventListener('click',function(){billNudge(-1)});
+billNext.addEventListener('click',function(){billNudge(1)});
+(function(){
+  var sx=0,so=0,down=false,id=null;
+  billView.addEventListener('pointerdown',function(e){
+    if(!geo.move||(e.pointerType==='mouse'&&e.button!==0))return;
+    down=true;sx=e.clientX;so=bill.off;id=e.pointerId;
+  });
+  billView.addEventListener('pointermove',function(e){
+    if(!down||e.pointerId!==id)return;
+    var dx=e.clientX-sx;
+    if(!bill.drag){
+      if(Math.abs(dx)<8)return;
+      bill.drag=true;billView.classList.add('drag');
+      try{billView.setPointerCapture(id)}catch(err){}
+    }
+    bill.to=so+dx;
+  });
+  function end(e){
+    if(!down||(e&&e.pointerId!==id))return;
+    down=false;
+    if(bill.drag){bill.drag=false;billView.classList.remove('drag')}
+  }
+  billView.addEventListener('pointerup',end);
+  billView.addEventListener('pointercancel',end);
+})();
 function billStep(){
   if(!geo.move)return;
   var p=(cur+vh-geo.billT)/(vh+geo.billH);
   if(p<-.15||p>1.15)return;
   p=clamp(p,0,1);
   var travel=Math.max(0,geo.trackW-vw),tx=travel?lerp(vw*.08,-travel-vw*.02,p):0;
+  /* the visitor's own push, by arrow or drag, rides on top of the scroll-driven slide */
+  var lo=-travel-vw*.02-tx,hi=vw*.08-tx;
+  if(!travel)lo=hi=0;
+  bill.to=clamp(bill.to,lo,hi);
+  if(bill.drag)bill.off=bill.to;else{bill.off+=(bill.to-bill.off)*.16;if(Math.abs(bill.to-bill.off)<.3)bill.off=bill.to}
+  bill.off=clamp(bill.off,lo,hi);
+  tx+=bill.off;
+  var atS=bill.to>=hi-1,atE=bill.to<=lo+1;
+  if(atS!==bill.atS){bill.atS=atS;billPrev.disabled=atS}
+  if(atE!==bill.atE){bill.atE=atE;billNext.disabled=atE}
   billTrack.style.transform='translate3d('+tx.toFixed(2)+'px,0,0)';
   for(var i=0;i<figs.length;i++){
     var f=figs[i],n=clamp((f.cx+tx-vw*.5)/(vw*.5),-1.3,1.3);
