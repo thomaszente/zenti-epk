@@ -231,6 +231,15 @@ label{font-size:var(--t-s);color:var(--bone-dim)}
 .pwave{cursor:pointer}
 .pwave canvas{width:100%;height:56px}
 @media (max-width:560px){.trk{gap:16px}.pbtn{width:48px;height:48px}}
+.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.lists a{display:grid;gap:12px;align-content:start;color:inherit;text-decoration:none}
+.lists img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;box-shadow:0 30px 50px -34px #000;transition:transform .5s var(--ease)}
+.lists a:hover img{transform:scale(1.025)}
+.lists div{font-size:15px;line-height:1.4}
+.lists b{display:block;font-weight:600}
+.lists span{display:block;color:var(--bone-mute);font-size:var(--t-s)}
+.lists .go{color:var(--hue);margin-top:4px}
+@media (max-width:640px){.lists{grid-template-columns:1fr;gap:16px}.lists a{grid-template-columns:104px 1fr;gap:16px;align-items:center}}
 .linkrow{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:24px}
 .nudge{margin-top:clamp(28px,4vw,44px);font-family:var(--display);font-variation-settings:"SOFT" 70;font-size:var(--t-xl);line-height:1.2;letter-spacing:-.01em}
 
@@ -493,9 +502,15 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
       <figure><img src="img/r-cafe.jpg" alt="Cover art: The Great Journey on Cafe De Anatolia" width="700" height="697" loading="lazy"><figcaption><b>The Great Journey</b><span>Cafe De Anatolia, with Kalico Jak</span></figcaption></figure>
       <figure><img src="img/r-sun.jpg" alt="Cover art: Solar Call on A Magic Sun" width="700" height="695" loading="lazy"><figcaption><b>Solar Call</b><span>A Magic Sun</span></figcaption></figure>
     </div>
+
+    <h3 class="sub">More on SoundCloud</h3>
+    <div class="lists">
+      <a href="https://soundcloud.com/zentimusic/sets/zenti-guest-podcasts"><img src="img/pl-mixes.jpg" alt="" width="800" height="800" loading="lazy"><div><b>Live Mixes &amp; Podcasts</b><span>Festival and club recordings, plus guest mixes</span><span class="go">Open the playlist</span></div></a>
+      <a href="https://soundcloud.com/zentimusic/sets/original-tracks"><img src="img/pl-originals.jpg" alt="" width="800" height="800" loading="lazy"><div><b>Originals &amp; Releases</b><span>Original tracks and label releases</span><span class="go">Open the playlist</span></div></a>
+      <a href="https://soundcloud.com/zentimusic/sets/free-dls"><img src="img/pl-free.jpg" alt="" width="800" height="800" loading="lazy"><div><b>Gifts &amp; Free Downloads</b><span>Free tracks to download and keep</span><span class="go">Open the playlist</span></div></a>
+    </div>
     <p class="linkrow">
       <a class="txt" href="https://open.spotify.com/artist/5cwPDq4NrVBXRySkiLMkiL">Spotify</a>
-      <a class="txt" href="https://soundcloud.com/zentimusic/sets/original-tracks">Original tracks on SoundCloud</a>
       <a class="txt" href="https://www.beatport.com/artist/zenti/1146352">Beatport</a>
       <a class="txt" href="https://soundcloud.com/zentimusic">SoundCloud</a>
     </p>
