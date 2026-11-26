@@ -471,7 +471,7 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
   <div class="wrap">
     <div class="head">
       <h2>The rooms, the festivals, the names on the bill.</h2>
-      <p>Search for a venue, a city or an artist you know. The larger names are headliners ZENTI has opened for or shared a lineup with.</p>
+      <p>The larger names are headliners ZENTI has opened for or shared a lineup with.</p>
     </div>
     <ul class="credits">
       <li><b>Lee Burridge</b><span>Kingdom, Austin</span></li>
@@ -482,7 +482,6 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
       <li><b>Burning Man</b><span>Caravan of Light</span></li>
     </ul>
     <div class="tools">
-      <div class="search"><label for="xq">Search the list</label><input id="xq" type="search" placeholder="Try Miami, Kingdom or Monolink" autocomplete="off"></div>
       <div class="filter" id="xchips" role="group" aria-label="Show"></div>
     </div>
     <div id="xlist"></div>
@@ -518,7 +517,7 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 <section class="sec" id="listen">
   <div class="wrap">
     <div class="head">
-      <h2>Six sets, from a water tower to the playa.</h2>
+      <h2>From the club to the playa.</h2>
       <p>Live recordings and guest mixes, all on SoundCloud.</p>
     </div>
     <ul class="mixes" id="mixes"></ul>
@@ -745,7 +744,7 @@ var chips=$('xchips');
   b.addEventListener('click',function(){xf=c[0];drawX()});chips.appendChild(b);
 });
 function drawX(){
-  var q=$('xq').value.trim().toLowerCase(),box=$('xlist'),shown=0;box.textContent='';
+  var q='',box=$('xlist'),shown=0;box.textContent='';
   chips.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.f===xf?'true':'false')});
   X.forEach(function(g){
     if(xf!=='all'&&xf!==g.id)return;
@@ -763,9 +762,8 @@ function drawX(){
     hit.forEach(function(n){var li=document.createElement('li');li.textContent=n[0];if(n[2])li.className='top';if(n[1]){var i=document.createElement('i');i.textContent=n[1];li.appendChild(i)}ul.appendChild(li)});
     row.appendChild(h);row.appendChild(ul);box.appendChild(row);
   });
-  if(!shown){var p=document.createElement('p');p.className='none';p.textContent='No match for “'+$('xq').value.trim()+'”. Clear the search to see the full list.';box.appendChild(p)}
+  if(!shown){var p=document.createElement('p');p.className='none';p.textContent='Nothing listed here yet.';box.appendChild(p)}
 }
-$('xq').addEventListener('input',drawX);
 drawX();
 
 /* MIXES: [kind, title, where, link] */
