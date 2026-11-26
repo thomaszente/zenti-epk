@@ -347,6 +347,9 @@ form>.btn{justify-self:start;cursor:pointer}
 .formwarn{color:var(--hue);font-size:var(--t-s);margin:0}
 .btn[disabled]{opacity:.55;cursor:default}
 @media (max-width:860px){.book{grid-template-columns:1fr}}
+.bkapp{margin-top:22px;color:var(--bone-dim);font-size:var(--t-s);line-height:1.55;max-width:34ch}
+.bkapp a{display:inline-block;margin-top:8px}
+.trk{display:inline-flex;margin-top:12px}
 @media (max-width:640px){.row3{grid-template-columns:1fr}}
 @media (max-width:480px){.row2{grid-template-columns:1fr}}
 
@@ -596,6 +599,7 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
         <p class="addr"><b id="b-addr">zentimusic@gmail.com</b><button class="btn line sm" type="button" id="addr-copy">Copy address</button></p>
         <a class="txt" href="https://instagram.com/zentimusic">@zentimusic</a>
         <a class="txt" href="https://instagram.com/cosmotion.space">@cosmotion.space</a>
+        <p class="bkapp">Every request gets a private booking page: offer, Simple Agreement to sign online, deposit, rider and show details in one place.<br><a class="txt" href="https://zenti-booking.vercel.app">Open the booking app ↗</a></p>
       </div>
       <form id="bk" novalidate>
         <div class="row2">
@@ -1058,22 +1062,34 @@ $('bk').addEventListener('submit',function(e){
   if(!EMAIL_RE.test(email))return showWarn('Please add an email address so Thomas can reply.');
   warn.hidden=true;btn.disabled=true;btn.textContent='Sending\u2026';
 
+  /* Also file the request in ZENTI's booking app, which returns the promoter's private tracking link. */
+  var tracked=fetch('https://lglfsezwkfkpdamnvwoo.supabase.co/rest/v1/rpc/submit_booking_request',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_RakT_oAPKgYw-MdxIi76Pw_6SANFeM-'},body:JSON.stringify({payload:{
+    name:v('b-name'),email:email,event:v('b-ev'),venue:v('b-ev'),city:v('b-city'),date:d,setTime:slot,setLength:v('b-len'),notes:[v('b-type'),v('b-msg')].filter(Boolean).join(' — '),website:v('b-co')
+  }})}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});
+  function showTracked(tok){
+    if(!tok||typeof tok!=='string')return;
+    var a=document.createElement('a');a.className='btn line sm trk';a.href='https://zenti-booking.vercel.app/?b='+encodeURIComponent(tok);a.textContent='Track your booking \u2197';
+    $('b-sent').appendChild(document.createElement('br'));$('b-sent').appendChild(a);
+  }
   fetch('/api/booking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     name:v('b-name'),email:email,event:v('b-ev'),date:date,city:v('b-city'),
     slot:slot,type:v('b-type'),length:v('b-len'),message:v('b-msg'),company:v('b-co')
   })}).then(function(r){
     return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok&&j.ok,status:r.status,error:j.error}});
   }).then(function(res){
-    reset();
-    if(res.ok){
-      $('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';
-      $('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;
-      $('b-out').classList.add('show');
-      return;
-    }
-    if(res.status===400&&res.error)return showWarn(res.error);
-    fallback();
-  },fallback);
+    return tracked.then(function(tok){
+      reset();
+      if(res.ok||tok){
+        $('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';
+        showTracked(tok);
+        $('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;
+        $('b-out').classList.add('show');
+        return;
+      }
+      if(res.status===400&&res.error)return showWarn(res.error);
+      fallback();
+    });
+  },function(){tracked.then(function(tok){if(tok){reset();$('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';showTracked(tok);$('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;$('b-out').classList.add('show')}else fallback()})});
 });
 $('b-copy').addEventListener('click',function(){copy($('b-text').textContent,'Message copied')});
 $('addr-copy').addEventListener('click',function(){copy($('b-addr').textContent,'Address copied')});
