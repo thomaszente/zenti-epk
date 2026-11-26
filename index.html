@@ -345,6 +345,9 @@ form>.btn{justify-self:start;cursor:pointer}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .sent{font-family:var(--display);font-size:var(--t-l);line-height:1.3;color:var(--bone);margin:0}
 .formwarn{color:var(--hue);font-size:var(--t-s);margin:0}
+.bkh{margin:14px 0 -4px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--hue)}
+#bk label i{font-style:normal;color:var(--hue)}
+#bk .miss{border-color:var(--hue)!important;box-shadow:0 0 0 1px var(--hue)}
 .btn[disabled]{opacity:.55;cursor:default}
 @media (max-width:860px){.book{grid-template-columns:1fr}}
 .bkapp{margin-top:22px;color:var(--bone-dim);font-size:var(--t-s);line-height:1.55;max-width:34ch}
@@ -601,24 +604,31 @@ body.hasbar .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
         <p class="bkapp">Every request gets a private booking page: offer, Simple Agreement to sign online, deposit, rider and show details in one place.<br><a class="txt" href="https://zenti-booking.vercel.app">Open the booking app ↗</a></p>
       </div>
       <form id="bk" novalidate>
-        <div class="row2">
-          <div class="field"><label for="b-name">Your name</label><input id="b-name" autocomplete="name"></div>
-          <div class="field"><label for="b-email">Your email</label><input id="b-email" type="email" autocomplete="email"></div>
-        </div>
-        <div class="row2">
-          <div class="field"><label for="b-ev">Event or venue</label><input id="b-ev"></div>
-          <div class="field"><label for="b-city">City</label><input id="b-city"></div>
-        </div>
-        <div class="row3">
-          <div class="field"><label for="b-date">Date</label><input id="b-date" type="date"></div>
-          <div class="field"><label for="b-slot">Slot</label>
-            <select id="b-slot"><option>Not sure yet</option><option>Sunset</option><option>Opening</option><option>Peak hour</option><option>After hours</option><option>Sunrise</option></select></div>
-          <div class="field"><label for="b-len">Set length</label>
-            <select id="b-len"><option>60 minutes</option><option>90 minutes</option><option selected>2 hours</option><option>3 hours or more</option><option>Not sure yet</option></select></div>
-        </div>
-        <div class="field"><label for="b-type">Type of booking</label>
-          <select id="b-type"><option>Club night</option><option>Festival</option><option>Private or brand event</option><option>Retreat or gathering</option><option>Guest mix or podcast</option></select></div>
-        <div class="field"><label for="b-msg">Lineup, capacity, anything else</label><textarea id="b-msg"></textarea></div>
+        <p class="bkh">Your details</p>
+        <div class="row2"><div class="field"><label for="b-name">Your name <i>*</i></label><input id="b-name" name="name" type="text" required autocomplete="name"></div><div class="field"><label for="b-email">Email <i>*</i></label><input id="b-email" name="email" type="email" required autocomplete="email"></div></div>
+        <div class="row2"><div class="field"><label for="b-phone">Phone <i>*</i></label><input id="b-phone" name="phone" type="tel" required autocomplete="tel"></div><div class="field"><label for="b-company">Company / collective</label><input id="b-company" name="company" type="text" autocomplete="organization"></div></div>
+        <div class="row2"><div class="field"><label for="b-legalEntity">Contracting legal entity <i>*</i></label><input id="b-legalEntity" name="legalEntity" type="text" required placeholder="Company name on the contract"></div><div class="field"><label for="b-signatory">Authorized contract signatory <i>*</i></label><input id="b-signatory" name="signatory" type="text" required placeholder="Name & title"></div></div>
+        <div class="field"><label for="b-instagram">Instagram</label><input id="b-instagram" name="instagram" type="text" placeholder="@yourparty"></div>
+        <p class="bkh">The event</p>
+        <div class="field"><label for="b-event">Event name <i>*</i></label><input id="b-event" name="event" type="text" required></div>
+        <div class="row2"><div class="field"><label for="b-eventType">Type of event <i>*</i></label><select id="b-eventType" name="eventType" required><option value="">—</option><option>Club</option><option>Festival</option><option>Private event</option><option>Corporate</option><option>After-hours</option><option>Retreat</option><option>Day party / rooftop</option><option>Concert / showcase</option><option>Wedding / celebration</option><option>Brand activation / launch</option><option>Guest mix or podcast</option><option>Other</option></select></div><div class="field"><label for="b-access">Public or private? <i>*</i></label><select id="b-access" name="access" required><option value="">—</option><option>Public — ticketed</option><option>Public — free</option><option>Private / invite-only</option></select></div></div>
+        <div class="row2"><div class="field"><label for="b-venue">Venue <i>*</i></label><input id="b-venue" name="venue" type="text" required></div><div class="field"><label for="b-city">City <i>*</i></label><input id="b-city" name="city" type="text" required autocomplete="address-level2"></div></div>
+        <div class="row2"><div class="field"><label for="b-date">Date <i>*</i></label><input id="b-date" name="date" type="date" required></div><div class="field"><label for="b-altDate">Backup date</label><input id="b-altDate" name="altDate" type="date"></div></div>
+        <div class="row2"><div class="field"><label for="b-capacity">Venue capacity <i>*</i></label><input id="b-capacity" name="capacity" type="text" required placeholder="e.g. 400"></div><div class="field"><label for="b-attendance">Expected attendance <i>*</i></label><input id="b-attendance" name="attendance" type="text" required placeholder="e.g. 300"></div></div>
+        <div class="row2"><div class="field"><label for="b-ticketPrice">Ticket price <i id="b-tpStar">*</i></label><input id="b-ticketPrice" name="ticketPrice" placeholder="e.g. $25 GA / $40 door"></div><div class="field"><label for="b-stages">Stages / rooms operating</label><input id="b-stages" name="stages" type="text" placeholder="e.g. 2 rooms"></div></div>
+        <div class="field"><label for="b-soundSystem">Sound system installed</label><input id="b-soundSystem" name="soundSystem" type="text" placeholder="e.g. Funktion-One, Void, L-Acoustics"></div>
+        <div class="field"><label for="b-link">Event link (tickets, IG, RA)</label><input id="b-link" name="link" type="url" placeholder="https://"></div>
+        <p class="bkh">Music &amp; lineup</p>
+        <div class="field"><label for="b-concept">Event concept / musical direction <i>*</i></label><textarea id="b-concept" name="concept" required placeholder="The vibe, theme and sound of the night"></textarea></div>
+        <div class="field"><label for="b-musicExpect">Any specific musical expectations?</label><input id="b-musicExpect" name="musicExpect" type="text" placeholder="Warm-up, peak time, closing set…"></div>
+        <div class="field"><label for="b-lineup">Lineup — confirmed or being considered <i>*</i></label><input id="b-lineup" name="lineup" type="text" required></div>
+        <div class="field"><label for="b-pastArtists">Notable artists you've booked before</label><input id="b-pastArtists" name="pastArtists" type="text"></div>
+        <div class="row2"><div class="field"><label for="b-setTime">Ideal set time</label><input id="b-setTime" name="setTime" type="text" placeholder="e.g. 11p–1a"></div><div class="field"><label for="b-setLength">Set length</label><select id="b-setLength" name="setLength"><option>1 hour</option><option selected>1.5 hours</option><option>2 hours</option><option>3+ hours / open-close</option><option>Not sure yet</option></select></div></div>
+        <p class="bkh">Offer &amp; promotion</p>
+        <div class="row2"><div class="field"><label for="b-offer">Offer (USD) <i>*</i></label><input id="b-offer" name="offer" type="text" required placeholder="Fee you have in mind"></div><div class="field"><label for="b-outOfTown">Outside Austin, TX?</label><select id="b-outOfTown" name="outOfTown"><option value="no">No — Austin</option><option value="yes">Yes — travel & hotel needed</option></select></div></div>
+        <div class="row3"><div class="field"><label for="b-paidAds">Paid advertising planned? <i>*</i></label><select id="b-paidAds" name="paidAds" required><option value="">—</option><option>Yes</option><option>No</option><option>Not sure yet</option></select></div><div class="field"><label for="b-photoVideo">Pro photo / video provided? <i>*</i></label><select id="b-photoVideo" name="photoVideo" required><option value="">—</option><option>Yes</option><option>No</option><option>Not sure yet</option></select></div><div class="field"><label for="b-collabPosts">Collab social posts with ZENTI? <i>*</i></label><select id="b-collabPosts" name="collabPosts" required><option value="">—</option><option>Yes</option><option>No</option><option>Not sure yet</option></select></div></div>
+        <div class="field"><label for="b-sponsors">Sponsors / brand affiliations</label><input id="b-sponsors" name="sponsors" type="text"></div>
+        <div class="field"><label for="b-notes">Anything else?</label><textarea id="b-notes" name="notes" placeholder="Hospitality, green room, anything we should know"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="b-co">Company</label><input id="b-co" tabindex="-1" autocomplete="off"></div>
         <button class="btn solid" type="submit" id="b-send">Send booking request</button>
         <p class="formwarn" id="b-warn" hidden></p>
@@ -1025,7 +1035,7 @@ var Journey=(function(){
     g.textAlign='left';g.fillText('Energy',pad,16);
   }
   range.addEventListener('input',function(){pick(+range.value)});
-  $('jr-book').addEventListener('click',function(){$('b-slot').value=SLOTS[sel].k;$('book').scrollIntoView({behavior:fx?'smooth':'auto'});toast(SLOTS[sel].k+' slot added to your request')});
+  $('jr-book').addEventListener('click',function(){$('b-setTime').value=SLOTS[sel].k+' slot';$('book').scrollIntoView({behavior:fx?'smooth':'auto'});toast(SLOTS[sel].k+' slot added to your request')});
   pick(2);
   var api={draw:draw,vis:true};
   if('IntersectionObserver' in window)new IntersectionObserver(function(en){api.vis=en[0].isIntersecting}).observe(c);
@@ -1038,56 +1048,42 @@ $('rider-copy').addEventListener('click',function(){copy('ZENTI technical rider 
 /* BOOKING */
 var v=function(id){return $(id).value.trim()};
 var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+(function(){var ac=$('b-access'),st=$('b-tpStar');function syncT(){st.style.display=ac.value==='Public — ticketed'?'':'none'}ac.addEventListener('change',syncT);syncT();
+  $('bk').addEventListener('input',function(e){if(e.target.classList)e.target.classList.remove('miss')});})();
 $('bk').addEventListener('submit',function(e){
   e.preventDefault();
-  var d=v('b-date'),date='';
-  if(d){var p=d.split('-');date=new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})}
-  var slot=v('b-slot')==='Not sure yet'?'':v('b-slot');
-  var rows=[['Event',v('b-ev')],['Date',date],['City',v('b-city')],['Type',v('b-type')],['Slot',slot],['Set length',v('b-len')]].filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n');
-  var msg='Hi Thomas,\n\nI\u2019d like to book ZENTI.\n\n'+rows+(v('b-msg')?'\n\n'+v('b-msg'):'')+(v('b-name')?'\n\n'+v('b-name'):'')+(v('b-email')?'\n'+v('b-email'):'');
-  $('b-text').textContent=msg;
-  $('b-mail').href='mailto:zentimusic@gmail.com?subject='+encodeURIComponent('ZENTI booking inquiry'+(v('b-ev')?': '+v('b-ev'):''))+'&body='+encodeURIComponent(msg);
-
-  var warn=$('b-warn'),btn=$('b-send'),email=v('b-email');
+  var f=$('bk'),q={};[].forEach.call(f.querySelectorAll('[name]'),function(el){q[el.name]=el.value.trim()});
+  q.website=v('b-co');
+  var warn=$('b-warn'),btn=$('b-send'),email=q.email;
+  [].forEach.call(f.querySelectorAll('.miss'),function(x){x.classList.remove('miss')});
+  var miss=[].filter.call(f.querySelectorAll('[required]'),function(x){return !x.value.trim()});
+  if(q.access==='Public — ticketed'&&!q.ticketPrice)miss.push($('b-ticketPrice'));
+  if(!EMAIL_RE.test(email)&&miss.indexOf($('b-email'))<0)miss.push($('b-email'));
   function reset(){btn.disabled=false;btn.textContent='Send booking request'}
   function showWarn(t){warn.textContent=t;warn.hidden=false;$('b-out').classList.remove('show')}
-  /* No inbox behind the form, or it refused: hand the message to their mail app. */
-  function fallback(){
-    reset();warn.hidden=true;
-    $('b-sent').hidden=true;$('b-text').hidden=false;$('b-acts').hidden=false;$('b-note').hidden=false;
-    $('b-out').classList.add('show');
-  }
-  if(!EMAIL_RE.test(email))return showWarn('Please add an email address so Thomas can reply.');
-  warn.hidden=true;btn.disabled=true;btn.textContent='Sending\u2026';
-
-  /* Also file the request in ZENTI's booking app, which returns the promoter's private tracking link. */
-  var tracked=fetch('https://lglfsezwkfkpdamnvwoo.supabase.co/rest/v1/rpc/submit_booking_request',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_RakT_oAPKgYw-MdxIi76Pw_6SANFeM-'},body:JSON.stringify({payload:{
-    name:v('b-name'),email:email,event:v('b-ev'),venue:v('b-ev'),city:v('b-city'),date:d,setTime:slot,setLength:v('b-len'),notes:[v('b-type'),v('b-msg')].filter(Boolean).join(' — '),website:v('b-co')
-  }})}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});
-  function showTracked(tok){
-    if(!tok||typeof tok!=='string')return;
-    var a=document.createElement('a');a.className='btn line sm trk';a.href='https://zenti-booking.vercel.app/?b='+encodeURIComponent(tok);a.textContent='Track your booking \u2197';
-    $('b-sent').appendChild(document.createElement('br'));$('b-sent').appendChild(a);
-  }
-  fetch('/api/booking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-    name:v('b-name'),email:email,event:v('b-ev'),date:date,city:v('b-city'),
-    slot:slot,type:v('b-type'),length:v('b-len'),message:v('b-msg'),company:v('b-co')
-  })}).then(function(r){
-    return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok&&j.ok,status:r.status,error:j.error}});
-  }).then(function(res){
-    return tracked.then(function(tok){
-      reset();
-      if(res.ok||tok){
-        $('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';
-        showTracked(tok);
-        $('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;
-        $('b-out').classList.add('show');
-        return;
-      }
-      if(res.status===400&&res.error)return showWarn(res.error);
-      fallback();
-    });
-  },function(){tracked.then(function(tok){if(tok){reset();$('b-sent').textContent='Sent. Thomas has your inquiry and will reply to '+email+'.';showTracked(tok);$('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;$('b-out').classList.add('show')}else fallback()})});
+  if(miss.length){miss.forEach(function(x){x.classList.add('miss')});miss[0].scrollIntoView({behavior:'smooth',block:'center'});miss[0].focus({preventScroll:true});
+    return showWarn('Please fill in the '+miss.length+' highlighted '+(miss.length===1?'field':'fields')+' (marked *).')}
+  var date='';if(q.date){var p=q.date.split('-');date=new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})}
+  var L={eventType:'Type',access:'Access',venue:'Venue',city:'City',capacity:'Capacity',attendance:'Expected attendance',ticketPrice:'Tickets',stages:'Stages',soundSystem:'Sound system',concept:'Concept',musicExpect:'Musical expectations',lineup:'Lineup',pastArtists:'Past artists',setTime:'Set time',setLength:'Set length',offer:'Offer (USD)',paidAds:'Paid ads',photoVideo:'Photo / video',collabPosts:'Collab posts',sponsors:'Sponsors',legalEntity:'Legal entity',signatory:'Signatory',link:'Link',notes:'Notes'};
+  var rows=[['Event',q.event],['Date',date]].concat(Object.keys(L).map(function(k){return [L[k],q[k]]})).filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n');
+  var msg='Hi Thomas,\n\nI’d like to book ZENTI.\n\n'+rows+'\n\n'+q.name+'\n'+email+(q.phone?'\n'+q.phone:'');
+  $('b-text').textContent=msg;
+  $('b-mail').href='mailto:zentimusic@gmail.com?subject='+encodeURIComponent('ZENTI booking inquiry: '+q.event)+'&body='+encodeURIComponent(msg);
+  function fallback(){reset();warn.hidden=true;$('b-sent').hidden=true;$('b-text').hidden=false;$('b-acts').hidden=false;$('b-note').hidden=false;$('b-out').classList.add('show')}
+  function done(tok){reset();warn.hidden=true;
+    $('b-sent').textContent='Sent. Thomas has your request and will reply to '+email+'. Your private booking link is on its way to your inbox too.';
+    if(tok&&typeof tok==='string'){var a=document.createElement('a');a.className='btn line sm trk';a.href='https://zenti-booking.vercel.app/?b='+encodeURIComponent(tok);a.textContent='Track your booking ↗';$('b-sent').appendChild(document.createElement('br'));$('b-sent').appendChild(a)}
+    $('b-sent').hidden=false;$('b-text').hidden=true;$('b-acts').hidden=true;$('b-note').hidden=true;$('b-out').classList.add('show')}
+  warn.hidden=true;btn.disabled=true;btn.textContent='Sending…';
+  /* Files the request in ZENTI's booking app, which emails Thomas and returns the promoter's private link.
+     If that is unreachable, fall back to the press kit's own email route, then to the visitor's mail app. */
+  fetch('https://lglfsezwkfkpdamnvwoo.supabase.co/rest/v1/rpc/submit_booking_request',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_RakT_oAPKgYw-MdxIi76Pw_6SANFeM-'},body:JSON.stringify({payload:q})})
+  .then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+  .then(function(tok){
+    if(tok)return done(tok);
+    return fetch('/api/booking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:q.name,email:email,event:q.event,date:date,city:q.city,slot:q.setTime,type:q.eventType,length:q.setLength,message:rows,company:q.website})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(r.ok&&j.ok)done(null);else fallback()})},fallback);
+  });
 });
 $('b-copy').addEventListener('click',function(){copy($('b-text').textContent,'Message copied')});
 $('addr-copy').addEventListener('click',function(){copy($('b-addr').textContent,'Address copied')});
